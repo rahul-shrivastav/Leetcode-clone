@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Div Shape</title>
+    <style>
+        div.outer {
+            padding: 30px;
+            background-color: rgb(228, 169, 169);
+        }
+
+        div.con:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-bottom: 13px solid #c11;
+            border-right: 14px solid transparent;
+        }
+
+        div.con:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-top: 13px solid #c11;
+            border-left: 14px solid transparent;
+        }
+
+        div.con {
+            display: inline-block;
+            position: relative;
+        }
+
+        input {
+            display: block;
+            background-color: #fff;
+            border: 0;
+            height: 30px;
+            width: 300px;
+            padding: 3px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="con">
+            <input type="text" placeholder="Search ..." />
+        </div>
+    </div>
+</body>
+
+</html>
