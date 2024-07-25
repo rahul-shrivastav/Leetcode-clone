@@ -1,0 +1,13 @@
+const Navbar = () => {
+    return (
+        <div className="flex items-center justify-center gap-10 py-7">
+            <div className=""><button className=" px-3 py-3  ">Home</button></div>
+            <div className=""><button className=" px-3 py-3  ">Home</button></div>
+            <div className=""><button className=" px-3 py-3  ">Home</button></div>
+            <div className=""><button className=" px-3 py-3  ">Login</button></div>
+
+        </div>
+    );
+}
+
+export default Navbar;
