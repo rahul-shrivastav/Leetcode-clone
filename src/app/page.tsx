@@ -3,8 +3,11 @@ import { Console, log } from "console";
 
 export default function Home() {
   return (
-    <>
-      <Navbar />
+    < >
+      <div className="w-full h-svh bg-blue-300">
+
+        <Navbar />
+      </div>
     </>
 
   );
