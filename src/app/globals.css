@@ -63,7 +63,12 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.color1 {
+  background: #000000;
 }
