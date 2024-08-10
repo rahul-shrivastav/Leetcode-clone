@@ -70,5 +70,15 @@
 }
 
 .color1 {
-  background: #000000;
+  background: #070707;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 1px;
+  background: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(120, 42, 246);
+  height: 10px;
 }
