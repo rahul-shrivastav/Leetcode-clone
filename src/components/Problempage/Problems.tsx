@@ -11,7 +11,7 @@ const Problems = ({ name = "N-Queen Problem", difficulty = "Hard" }) => {
         <div className="border-2 border-white mb-2 hover:bg-gray-950 border-opacity-10 w-full flex   items-center justify-between py-2 px-5 rounded-lg">
             <div className="flex gap-5 items-center justify-center">
                 <div className="text-violet-400 text-2xl max-w-6 ">{done ? <IoMdCheckmarkCircleOutline /> : <MdOutlineCancel />}</div>
-                <div className="bg-violet-900 p-2  rounded-xl text-white min-w-16 text-center scale-90">{difficulty}</div>
+                <div className="border border-violet-900 p-2  rounded-xl text-white min-w-16 text-center scale-90">{difficulty}</div>
             </div>
 
 
