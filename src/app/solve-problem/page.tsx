@@ -3,18 +3,14 @@ import Navbar from "@/components/Global/Navbar";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import Editor from "@/components/Problempage/Editor";
+import CodeEditor from "@/components/Problempage/CodeEditor";
 import { useEffect, useState } from "react";
 
 export default function Page() {
     const desc = "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not use the same element twice.You can return the answer in any order."
 
-    const [code, setCode] = useState('');
-    const [domLoaded, setDomLoaded] = useState(false);
 
-    useEffect(() => {
-        setDomLoaded(true);
-    }, []);
+
     return (
         <div className="w-full h-screen overflow-x-auto overflow-y-clip text-slate-300 max-h-screen bg-black  flex flex-col items-center justify-end ">
             <Navbar />
@@ -24,7 +20,7 @@ export default function Page() {
                 <ResizablePanelGroup direction="horizontal"  >
                     <ResizablePanel className=" ">
                         <div className=" pb-5 w-full h-full  flex flex-col items-center justify-start gap-4 overflow-y-scroll scrollbar2 min-w-[370px] ">
-                            <div className="w-11/12 p-4 rounded-md border-slate-400 text-center text-violet-700 font-bold text-2xl border   mt-5">K-Queen Problem</div>
+                            <div className="w-11/12 p-4 rounded-md border-slate-400 text-center text-violet-600 font-bold text-2xl border   mt-5">K-Queen Problem</div>
                             <div className="w-11/12  rounded-2xl border border-slate-700 text-left  p-4"><span className="font-bold text-slate-500">Description :</span> <br /><span>{desc}</span></div>
                             <div className="w-11/12 rounded-2xl  border border-slate-700 text-left  p-4">
                                 <span className=" text-slate-500 font-bold">Example 1 :</span><br />
@@ -54,30 +50,14 @@ export default function Page() {
                     <ResizablePanel className="">
                         <ResizablePanelGroup className="w-full" direction="vertical">
                             <ResizablePanel className=" w-full">
-                                <div className=" flex  items-center justify-center gap-1  w-full pt-2 ">
-                                    <button className="border  text-white hover:bg-white hover:text-black w-24  py-1 rounded-sm">Run</button>
-                                    <button className="border  text-white hover:bg-white hover:text-black w-24  py-1 rounded-sm">Submit</button>
-                                    <div className="absolute right-5 scale-[0.9]">
 
-                                        <Select defaultValue="python">
-                                            <SelectTrigger className="w-[100px] bg-black outline-none focus:outline-none">
-                                                <SelectValue placeholder="" className="border-none outline-none" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="python">Python</SelectItem>
-                                                <SelectItem value="cpp">C++</SelectItem>
-                                                <SelectItem value="java">Java</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </div>
+                                <div className=" border-0 pl-2 scrollbar2 border-blue-400 h-[98%] overflow-y-scroll">
 
+                                    <CodeEditor />
                                 </div>
-                                <div className=" mt-2 h-[90%] scrollbar2 ">
-                                    {domLoaded && <Editor />}
 
 
 
-                                </div>
 
                             </ResizablePanel>
 

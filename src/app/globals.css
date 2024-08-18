@@ -91,3 +91,12 @@
 .scrollbar2::-webkit-scrollbar-thumb {
   background: rgb(36, 36, 36);
 }
+
+.scrollbar3::-webkit-scrollbar {
+  width: 7px;
+  background: transparent;
+}
+
+.scrollbar3::-webkit-scrollbar-thumb {
+  background: rgb(91, 62, 148);
+}

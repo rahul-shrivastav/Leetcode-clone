@@ -1,11 +1,13 @@
+
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineCancel } from "react-icons/md";
 import { FaNotesMedical } from "react-icons/fa6";
-
-
+import { useRouter } from 'next/navigation'
 
 const Problems = ({ name = "N-Queen Problem", difficulty = "Hard" }) => {
     const done = false
+    const router = useRouter()
+
 
     return (
         <div className="border-2 border-white mb-2 hover:bg-gray-950 border-opacity-10 w-full flex   items-center justify-between py-2 px-5 rounded-lg">
@@ -20,7 +22,7 @@ const Problems = ({ name = "N-Queen Problem", difficulty = "Hard" }) => {
 
             <div className="flex items-center justify-center gap-2  min-w-36">
 
-                <button className=" bg-none border hover:border-white border-violet-700 text-white hover:bg-slate-200 px-3 h-7 hover:text-black rounded-sm ">Attempt</button>
+                <button onClick={() => { router.push('/solve-problem') }} className=" bg-none border hover:border-white border-violet-700 text-white hover:bg-slate-200 px-3 h-7 hover:text-black rounded-sm ">Attempt</button>
                 <button className=" bg-none border hover:border-white border-violet-700 text-white hover:bg-slate-200 px-3 h-7 hover:text-black rounded-sm "><FaNotesMedical /></button>
 
             </div>
