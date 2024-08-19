@@ -2,9 +2,8 @@
 import Navbar from "@/components/Global/Navbar";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import CodeEditor from "@/components/Problempage/CodeEditor";
-import { useEffect, useState } from "react";
+import { FaLaptopCode } from "react-icons/fa";
 
 export default function Page() {
     const desc = "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not use the same element twice.You can return the answer in any order."
@@ -18,6 +17,7 @@ export default function Page() {
             <div className={"w-full flex items-center justify-center  border  border-slate-800  h-[83%]  absolute top-[100px] "}>
 
                 <ResizablePanelGroup direction="horizontal"  >
+
                     <ResizablePanel className=" ">
                         <div className=" pb-5 w-full h-full  flex flex-col items-center justify-start gap-4 overflow-y-scroll scrollbar2 min-w-[370px] ">
                             <div className="w-11/12 p-4 rounded-md border-slate-400 text-center text-violet-600 font-bold text-2xl border   mt-5">K-Queen Problem</div>
@@ -46,19 +46,20 @@ export default function Page() {
                         </div>
 
                     </ResizablePanel>
+
                     <ResizableHandle withHandle className="opacity-40" />
+
                     <ResizablePanel className="">
                         <ResizablePanelGroup className="w-full" direction="vertical">
+                            <div className="relative h-full  w-full  text-white text-9xl flex flex-col gap-3 items-center justify-center">
+                                <FaLaptopCode className="z-10" />
+                                <div className="z-10 text-[13px]"><span className="text-violet-500">Log In</span> to start solving problems</div>
+                                <div className="bg-[url('/images/code.png')] bg-cover z-0 w-full h-full absolute brightness-[0.45] opacity-40 top-0 left-0"></div>
+                            </div>
                             <ResizablePanel className=" w-full">
-
                                 <div className=" border-0 pl-2 scrollbar2 border-blue-400 h-[98%] overflow-y-scroll">
-
                                     <CodeEditor />
                                 </div>
-
-
-
-
                             </ResizablePanel>
 
                             <ResizableHandle withHandle className="opacity-40" />
@@ -87,12 +88,10 @@ export default function Page() {
 
                                     </Tabs>
                                 </div>
-
-
                             </ResizablePanel>
-
                         </ResizablePanelGroup>
                     </ResizablePanel>
+
                 </ResizablePanelGroup>
             </div>
 
