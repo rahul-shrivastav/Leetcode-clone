@@ -51,7 +51,7 @@ export default function Page() {
 
                     <ResizablePanel className="">
                         <ResizablePanelGroup className="w-full" direction="vertical">
-                            <div className="relative h-full  w-full  text-white text-9xl flex flex-col gap-3 items-center justify-center">
+                            <div className=" hidden relative h-full  w-full  text-white text-9xl flex flex-col gap-3 items-center justify-center">
                                 <FaLaptopCode className="z-10" />
                                 <div className="z-10 text-[13px]"><span className="text-violet-500">Log In</span> to start solving problems</div>
                                 <div className="bg-[url('/images/code.png')] bg-cover z-0 w-full h-full absolute brightness-[0.45] opacity-40 top-0 left-0"></div>
