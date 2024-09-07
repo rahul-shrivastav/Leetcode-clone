@@ -100,3 +100,153 @@
 .scrollbar3::-webkit-scrollbar-thumb {
   background: rgb(91, 62, 148);
 }
+
+/* ------------------------------------------------------ */
+
+/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+  --w: 10ch;
+
+  font-size: 12px;
+  line-height: 1.2em;
+  letter-spacing: var(--w);
+  width: var(--w);
+  overflow: hidden;
+  white-space: nowrap;
+  color: #ffffff;
+  animation: l17 2s infinite;
+}
+
+.loader:before {
+  content: "Testing...";
+}
+
+@keyframes l17 {
+  0% {
+    text-shadow:
+      calc(0*var(--w)) -1.2em #FFFFFF, calc(-1*var(--w)) -1.2em #ffffff, calc(-2*var(--w)) -1.2em #FFFFFF, calc(-3*var(--w)) -1.2em #FFFFFF, calc(-4*var(--w)) -1.2em #FFFFFF,
+      calc(-5*var(--w)) -1.2em #FFFFFF, calc(-6*var(--w)) -1.2em #fdf3f3, calc(-7*var(--w)) -1.2em #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  4% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) -1.2em #FFFFFF, calc(-2*var(--w)) -1.2em #FFFFFF, calc(-3*var(--w)) -1.2em #FFFFFF, calc(-4*var(--w)) -1.2em #FFFFFF,
+      calc(-5*var(--w)) -1.2em #FFFFFF, calc(-6*var(--w)) -1.2em #FFFFFF, calc(-7*var(--w)) -1.2em #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  8% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) -1.2em #FFFFFF, calc(-3*var(--w)) -1.2em #FFFFFF, calc(-4*var(--w)) -1.2em #FFFFFF,
+      calc(-5*var(--w)) -1.2em #FFFFFF, calc(-6*var(--w)) -1.2em #FFFFFF, calc(-7*var(--w)) -1.2em #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  12% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) -1.2em #FFFFFF, calc(-4*var(--w)) -1.2em #FFFFFF,
+      calc(-5*var(--w)) -1.2em #FFFFFF, calc(-6*var(--w)) -1.2em #FFFFFF, calc(-7*var(--w)) -1.2em #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  16% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) -1.2em #FFFFFF,
+      calc(-5*var(--w)) -1.2em #FFFFFF, calc(-6*var(--w)) -1.2em #FFFFFF, calc(-7*var(--w)) -1.2em #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  20% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) -1.2em #FFFFFF, calc(-6*var(--w)) -1.2em #FFFFFF, calc(-7*var(--w)) -1.2em #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  24% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) -1.2em #FFFFFF, calc(-7*var(--w)) -1.2em #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  28% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) 0 #FFFFFF, calc(-7*var(--w)) -1.2em #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  32% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) 0 #FFFFFF, calc(-7*var(--w)) 0 #FFFFFF, calc(-8*var(--w)) -1.2em #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  36% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) 0 #FFFFFF, calc(-7*var(--w)) 0 #FFFFFF, calc(-8*var(--w)) 0 #FFFFFF, calc(-9*var(--w)) -1.2em #FFFFFF
+  }
+
+  40%,
+  60% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) 0 #FFFFFF, calc(-7*var(--w)) 0 #FFFFFF, calc(-8*var(--w)) 0 #FFFFFF, calc(-9*var(--w)) 0 #FFFFFF
+  }
+
+  64% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) 0 #FFFFFF, calc(-7*var(--w)) 0 #FFFFFF, calc(-8*var(--w)) 0 #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  68% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) 0 #FFFFFF, calc(-7*var(--w)) 0 #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  72% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) 0 #FFFFFF, calc(-7*var(--w)) 1.2em #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  76% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 0 #FFFFFF, calc(-6*var(--w)) 1.2em #FFFFFF, calc(-7*var(--w)) 1.2em #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  80% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 0 #FFFFFF,
+      calc(-5*var(--w)) 1.2em #FFFFFF, calc(-6*var(--w)) 1.2em #FFFFFF, calc(-7*var(--w)) 1.2em #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  84% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 0 #FFFFFF, calc(-4*var(--w)) 1.2em #FFFFFF,
+      calc(-5*var(--w)) 1.2em #FFFFFF, calc(-6*var(--w)) 1.2em #FFFFFF, calc(-7*var(--w)) 1.2em #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  88% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 0 #FFFFFF, calc(-3*var(--w)) 1.2em #FFFFFF, calc(-4*var(--w)) 1.2em #FFFFFF,
+      calc(-5*var(--w)) 1.2em #FFFFFF, calc(-6*var(--w)) 1.2em #FFFFFF, calc(-7*var(--w)) 1.2em #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  92% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 0 #FFFFFF, calc(-2*var(--w)) 1.2em #FFFFFF, calc(-3*var(--w)) 1.2em #FFFFFF, calc(-4*var(--w)) 1.2em #FFFFFF,
+      calc(-5*var(--w)) 1.2em #FFFFFF, calc(-6*var(--w)) 1.2em #FFFFFF, calc(-7*var(--w)) 1.2em #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  96% {
+    text-shadow:
+      calc(0*var(--w)) 0 #FFFFFF, calc(-1*var(--w)) 1.2em #FFFFFF, calc(-2*var(--w)) 1.2em #FFFFFF, calc(-3*var(--w)) 1.2em #FFFFFF, calc(-4*var(--w)) 1.2em #FFFFFF,
+      calc(-5*var(--w)) 1.2em #FFFFFF, calc(-6*var(--w)) 1.2em #FFFFFF, calc(-7*var(--w)) 1.2em #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+
+  100% {
+    text-shadow:
+      calc(0*var(--w)) 1.2em #FFFFFF, calc(-1*var(--w)) 1.2em #FFFFFF, calc(-2*var(--w)) 1.2em #FFFFFF, calc(-3*var(--w)) 1.2em #FFFFFF, calc(-4*var(--w)) 1.2em #FFFFFF,
+      calc(-5*var(--w)) 1.2em #FFFFFF, calc(-6*var(--w)) 1.2em #FFFFFF, calc(-7*var(--w)) 1.2em #FFFFFF, calc(-8*var(--w)) 1.2em #FFFFFF, calc(-9*var(--w)) 1.2em #FFFFFF
+  }
+}
