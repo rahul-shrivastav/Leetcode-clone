@@ -10,7 +10,6 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-solarizedlight.css';
-import { Value } from "@radix-ui/react-select";
 
 const CodeEditor = () => {
     const { toast } = useToast()
@@ -21,7 +20,7 @@ const CodeEditor = () => {
         })
     }
 
-    const [executing, setexecuting] = useState(false);
+    const [executing, setexecuting] = useState(true);
     const token = "957f66ba-dc4a-4919-abc0-de4e0cfec8d2"
     const [lang, setlang] = useState('52')
     const [code, setCode] = useState(
