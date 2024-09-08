@@ -2,8 +2,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { SignUp } from "@/controllers/auth.controller"
+import React from 'react'
 
-const page = () => {
+const Page = () => {
     const [inputs, setInputs] = useState({
         fullName: "",
         username: "",
@@ -59,4 +60,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

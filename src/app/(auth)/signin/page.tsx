@@ -4,7 +4,12 @@ import { useState } from "react";
 import { SignIn, GoogleSignin } from "@/controllers/auth.controller"
 import { FcGoogle } from "react-icons/fc";
 
-const page = () => {
+import React from 'react'
+
+
+
+
+const Page = () => {
     const [inputs, setInputs] = useState({
         username: "rahul",
         password: "password",
@@ -47,4 +52,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default Page;

@@ -1,7 +1,6 @@
 const InfiniteScroll = () => {
     return (
-        <div className="app  mt-10 w-full">
-
+        <div className="app  w-full">
             <div className="tag-list w-full">
                 <div className="loop-slider looper" >
                     <div className="inner">

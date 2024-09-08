@@ -24,7 +24,9 @@ export default function Home() {
             <div className="font-thin text-2xl mt-5">1v1 Battles Won : <span className="text-violet-300">{90}</span> </div>
             <button className="mt-10 font-thin border border-violet-600 hover:bg-gray-950  px-10 py-2  w-4/5 text-[20px] rounded-sm">Solve a Random Question</button>
             <button className="mt-10 font-thin border border-violet-600 hover:bg-gray-950  px-10 py-2  w-4/5 text-[20px] rounded-sm">Challenge a Friend</button>
-            <InfiniteScroll />
+            <div className="mt-10 w-full">
+              <InfiniteScroll />
+            </div>
 
           </div>
 
