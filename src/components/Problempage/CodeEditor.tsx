@@ -48,13 +48,12 @@ const CodeEditor = () => {
 
         } catch (error) {
             setexecuting(false)
-            toast({
-                title: `Daily Submission Limit Reached`,
-                description: ` There will be no longer submissions on Judge0 server. Try tomorrow.`,
-            })
+            // toast({
+            //     title: `Daily Submission Limit Reached`,
+            //     description: ` There will be no longer submissions on Judge0 server. Try tomorrow.`,
+            // })
         }
     }
-    // 93c07f3c-cc9e-47b8-b917-769f993484c9 gaitoken
 
     const submitCode = async (code: any, expected: string = '2') => {
         const url = 'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=false&fields=*';
@@ -78,11 +77,23 @@ const CodeEditor = () => {
             const response = await fetch(url, options);
             const data = await response.json()
                 .then((data) => {
-                    settoken(data.token);
+                    console.log(data)
+                    if (data.message) {
+                        toast({
+                            title: `Daily Submission Limit Reached`,
+                            description: ` There will be no longer submissions on Judge0 server. Try tomorrow.`,
+                        })
+
+                    }
+                    else {
+
+                        settoken(data.token);
+                    }
                 })
                 .then(async () => {
                     let result = await fetchresults(token)
                 })
+
         } catch (error) {
             toast({
                 title: `${error}`,
