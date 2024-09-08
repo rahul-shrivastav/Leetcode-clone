@@ -1,8 +1,8 @@
 import NextAuth from "next-auth"
-import Credentials from "next-auth/providers/credentials"
-import bcrypt from 'bcryptjs'
-import UserModel from '@/model/user';
-import dbConnect from "@/utils/dbConnect";
+// import Credentials from "next-auth/providers/credentials"
+// import bcrypt from 'bcryptjs'
+// import UserModel from '@/model/user';
+// import dbConnect from "@/utils/dbConnect";
 import Google from "next-auth/providers/google";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
