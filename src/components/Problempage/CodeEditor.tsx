@@ -10,7 +10,6 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-solarizedlight.css';
-import { Scale } from "lucide-react";
 
 const CodeEditor = () => {
     const { toast } = useToast()
@@ -31,8 +30,8 @@ const CodeEditor = () => {
         const options = {
             method: 'GET',
             headers: {
-                // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2,
-                'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
+                'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2,
+                // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
                 'x-rapidapi-host': 'judge0-ce.p.rapidapi.com'
             }
         };
@@ -64,8 +63,6 @@ const CodeEditor = () => {
     }
 
     const submitCode = async (code: any, expected: string = '2') => {
-
-
         try {
             if (token) {
                 let result = await fetchresults(token)
@@ -77,8 +74,8 @@ const CodeEditor = () => {
                 const options = {
                     method: 'POST',
                     headers: {
-                        'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
-                        // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2, 
+                        // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
+                        'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2,
                         'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
                         'Content-Type': 'application/json'
                     },
