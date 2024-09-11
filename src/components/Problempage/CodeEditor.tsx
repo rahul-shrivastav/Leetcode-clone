@@ -30,7 +30,7 @@ const CodeEditor = () => {
         const options = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2,
+                'x-rapidapi-key': '8017456fe0msh773044845ff0a38p101950jsn343e77d7b0ce',
                 // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
                 'x-rapidapi-host': 'judge0-ce.p.rapidapi.com'
             }
@@ -75,7 +75,7 @@ const CodeEditor = () => {
                     method: 'POST',
                     headers: {
                         // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
-                        'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2,
+                        'x-rapidapi-key': '8017456fe0msh773044845ff0a38p101950jsn343e77d7b0ce',
                         'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
                         'Content-Type': 'application/json'
                     },
