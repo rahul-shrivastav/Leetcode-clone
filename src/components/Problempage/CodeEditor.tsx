@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast"
 import { AiOutlinePython } from "react-icons/ai";
 
@@ -10,17 +10,23 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-solarizedlight.css';
+import { Scale } from "lucide-react";
 
 const CodeEditor = () => {
     const { toast } = useToast()
-
     const [executing, setexecuting] = useState(false);
     const [token, settoken] = useState('')
-    const [lang, setlang] = useState('92')
     const [code, setCode] = useState(`def Solution():\n\t#'''You can define other functions before Solution functions'''\n\t#'''Write your code inside this Solution function and must return the answer'''\n\n\n\treturn\n\nprint(Solution())`);
+    useEffect(() => {
+        settoken('')
+    }, [code])
 
     const fetchresults = async (tokenn: any) => {
+        if (!tokenn) {
+            return
+        }
         setexecuting(true)
+        console.log('fcalled')
         const url = `https://judge0-ce.p.rapidapi.com/submissions/${tokenn}?base64_encoded=true&fields=*`;
         const options = {
             method: 'GET',
@@ -37,6 +43,8 @@ const CodeEditor = () => {
             const result = await response.json()
                 .then((result) => {
                     setexecuting(false);
+                    console.log(result)
+                    console.log(tokenn)
                     if (result.source_code) {
                         toast({
                             title: `${result.status.description}`,
@@ -48,51 +56,60 @@ const CodeEditor = () => {
 
         } catch (error) {
             setexecuting(false)
-            // toast({
-            //     title: `Daily Submission Limit Reached`,
-            //     description: ` There will be no longer submissions on Judge0 server. Try tomorrow.`,
-            // })
+            toast({
+                title: `${error}`,
+                description: `fetcherror There will be no longer submissions on Judge0 server. Try tomorrow.`,
+            })
         }
     }
 
     const submitCode = async (code: any, expected: string = '2') => {
-        const url = 'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=false&fields=*';
-        const options = {
-            method: 'POST',
-            headers: {
-                'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
-                // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2, 
-                'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                language_id: 92,
-                source_code: btoa(code),
-                expected_output: btoa(expected),
-            })
-        }
+
 
         try {
-            // @ts-ignore
-            const response = await fetch(url, options);
-            const data = await response.json()
-                .then((data) => {
-                    console.log(data)
-                    if (data.message) {
-                        toast({
-                            title: `Daily Submission Limit Reached`,
-                            description: ` There will be no longer submissions on Judge0 server. Try tomorrow.`,
-                        })
+            if (token) {
+                let result = await fetchresults(token)
+            }
+            else {
+                console.log('scalled')
+                const url = 'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=false&fields=*';
 
-                    }
-                    else {
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
+                        // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2, 
+                        'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        language_id: 92,
+                        source_code: btoa(code),
+                        expected_output: btoa(expected),
+                    })
+                }
 
-                        settoken(data.token);
-                    }
-                })
-                .then(async () => {
-                    let result = await fetchresults(token)
-                })
+                // @ts-ignore
+                const response = await fetch(url, options);
+                const data = await response.json()
+                    .then((data) => {
+                        console.log(data)
+                        if (data.message) {
+                            toast({
+                                title: `Daily Submission Limit Reached`,
+                                description: ` There will be no longer submissions on Judge0 server. Try tomorrow.`,
+                            })
+
+                        }
+                        else {
+
+                            settoken(data.token);
+                        }
+                    })
+                    .then(async () => {
+                        let result = await fetchresults(token)
+                    })
+            }
 
         } catch (error) {
             toast({
