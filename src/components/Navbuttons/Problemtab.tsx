@@ -1,7 +1,6 @@
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, } from "@/components/ui/sheet"
 import Problems from "../Problempage/Problems";
 import ProblemNav from "../Problempage/ProblemNav";
-import Logo from "../Global/Logo";
 
 const Problemtab = () => {
     return (
@@ -17,29 +16,9 @@ const Problemtab = () => {
                     <div className="w-full  h-full scale-100">
 
                         <ProblemNav />
-                        <Problems />
-                        <Problems difficulty="Medium" />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
-                        <Problems />
+                        <Problems difficulty="Medium" name='' id='' solved='' />
+
+
                     </div>
 
                 </SheetContent>

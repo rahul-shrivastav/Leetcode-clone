@@ -4,7 +4,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import { FaNotesMedical } from "react-icons/fa6";
 import { useRouter } from 'next/navigation'
 
-const Problems = ({ name = "N-Queen Problem", difficulty = "Hard" }) => {
+const Problems = ({ name, difficulty }: any) => {
     const done = false
     const router = useRouter()
 

@@ -30,8 +30,11 @@ export default function Home() {
 
           </div>
 
-          <div className=" w-7/12 h-[85vh]  flex flex-col items-center justify-center mt-20">
+          <div className=" w-7/12 h-[85vh]  flex flex-col items-center justify-center mt-20  ">
+
             <Metrics easy={50} med={90} hard={70} />
+
+
           </div>
 
         </div>
