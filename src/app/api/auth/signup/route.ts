@@ -1,6 +1,7 @@
 import dbConnect from '@/utils/dbConnect';
 import UserModel from '@/model/user';
 import bcrypt from 'bcryptjs';
+import { SignIn } from '@/controllers/auth.controller';
 
 export async function POST(request: Request) {
     await dbConnect();
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
                 password: hashedPassword
             });
 
-            await newUser.save();
+            await newUser.save().then(() => { SignIn({ username, password }) });
         };
     }
     catch (error) {

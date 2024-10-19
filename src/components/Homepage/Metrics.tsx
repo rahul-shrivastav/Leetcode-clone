@@ -11,7 +11,6 @@ const Metrics = (props: any) => {
         };
         const h = () => {
             var max = 2160;
-            console.log(window.innerWidth)
             forEach(document.querySelectorAll('.progress'), function (index: any, value: any) {
                 let percent = value.getAttribute('data-progress');
                 value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);

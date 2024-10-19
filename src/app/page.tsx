@@ -2,10 +2,11 @@
 import Navbar from "@/components/Global/Navbar";
 import InfiniteScroll from "@/components/Homepage/InfiniteScroll";
 import Metrics from "@/components/Homepage/Metrics";
-import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
-
+  const session = useSession()
+  console.log(session, 'sesion')
 
   return (
     < >
@@ -16,7 +17,13 @@ export default function Home() {
 
           <div className=" w-4/12 border h-[85vh] py-10 shadow-slate-900 border-violet-800 border-opacity-50 shadow-2xl flex flex-col items-center justify-center mt-20">
             <div className="font-extralight  text-2xl  ">Welcome ,</div>
-            <div className="m-5 font-extralight  text-4xl">Rahul Shrivastava</div>
+            {
+              //@ts-ignore
+              session.data && <div className="m-5 font-extralight  text-4xl">{session.data.user?.fullName}</div>
+            }
+            {
+              !session.data && <div className="m-5 font-extralight  text-4xl">To CodeArena</div>
+            }
             <div className="w-4/5 border border-violet-900 border-opacity-70 "></div>
             <div className="font-thin text-2xl mt-5">Total Solved : <span className="text-violet-300">{90}</span> </div>
             <div className="font-thin text-2xl mt-5">Total Unsolved : <span className="text-violet-300">{90}</span> </div>

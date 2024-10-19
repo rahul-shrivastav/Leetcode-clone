@@ -6,7 +6,7 @@ export interface User extends Document {
     username: string;
     fullName: string;
     password: string;
-
+    email: string;
 }
 
 // Updated User schema
@@ -14,6 +14,12 @@ const UserSchema: Schema<User> = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'Username is required'],
+        trim: true,
+        unique: true,
+    },
+    email: {
+        type: String,
+        required: [true, 'Email is required'],
         trim: true,
         unique: true,
     },

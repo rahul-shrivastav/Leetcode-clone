@@ -32,7 +32,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+,
+"prisma/schema.prisma"
+],
   "exclude": [
     "node_modules"
   ]

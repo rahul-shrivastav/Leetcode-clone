@@ -1,20 +1,16 @@
 'use server'
 import { signIn } from '@/auth'
-import { redirect } from 'next/navigation'
 
-const SignIn = async (inputs: any) => {
+const SignIn = (inputs: any) => {
     try {
-        await signIn("credentials", {
+        signIn("credentials", {
             redirect: false,
-            callbackUrl: "/",
             username: inputs.username,
             password: inputs.password
         })
-
     } catch (error) {
         console.log(error)
     }
-    redirect('/')
 }
 const SignUp = async (inputs: any) => {
     try {
@@ -24,9 +20,8 @@ const SignUp = async (inputs: any) => {
             body: JSON.stringify(inputs),
         });
         response = await response.json()
-        console.log("Signup done")
+        console.log("Signup done", response)
     } catch (error) {
-        // Handle error
         console.error('Error submitting form:', error);
     }
 }

@@ -1,5 +1,4 @@
 'use client'
-import Link from "next/link";
 import { useState } from "react";
 import { SignIn, GoogleSignin } from "@/controllers/auth.controller"
 import { FcGoogle } from "react-icons/fc";
@@ -7,6 +6,7 @@ import { MdPeopleAlt } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Login = () => {
+
     const [inputs, setInputs] = useState({
         username: "rahul",
         password: "password",
@@ -17,7 +17,7 @@ const Login = () => {
     };
 
     const handleSubmit = async (e: any) => {
-        e.preventDefault();
+        // e.preventDefault()
         SignIn(inputs)
     }
     return (
