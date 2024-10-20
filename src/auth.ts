@@ -21,7 +21,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         async signIn({ user, account, profile }) {
             // console.log(user.email, 'sininin')
             try {
-                let response = await fetch('http://localhost:3000/api/auth/login', {
+                let response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email: user.email }),
