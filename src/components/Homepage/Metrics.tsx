@@ -25,7 +25,7 @@ const Metrics = (props: any) => {
         <div className="  flex flex-col rounded-md items-center justify-center w-full shadow-slate-900 border h-full border-violet-800 border-opacity-50 shadow-2xl   p-10 ">
             <div className=" 2xl:text-2xl text-4xl font-thin relative -top-10">Your Progress</div>
 
-            <div className="flex scale-100  min-[1495px]:scale-50 h-96 items-center justify-center gap-4">
+            <div className="flex scale-100  min-[1495px]:scale-[0.9] h-96 items-center justify-center gap-4">
                 {/* esy */}
                 <div id="wrapper" className="center relative -top-20">
                     <svg className="progress blue noselect" data-progress={44} x="0px" y="0px" viewBox="0 0 776 628">
