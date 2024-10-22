@@ -13,9 +13,11 @@ export default function Home() {
       <div className="w-full overflow-x-clip h-fit min-h-svh bg-black flex flex-col ">
 
         <Navbar />
-        <div className="w-full  text-white gap-2 md:gap-10 grow  flex items-center justify-center bg-black">
+        <div className="w-full  text-white gap-2 md:gap-10 grow xl:flex-row  flex flex-col-reverse items-center justify-center bg-black">
 
-          <div className=" w-4/12 border h-[85vh] py-10 shadow-slate-900 border-violet-800 border-opacity-50 shadow-2xl flex flex-col items-center justify-center mt-20">
+
+          {/* leftside */}
+          <div className=" w-[90%] border h-[85vh] py-10 xl:w-4/12 shadow-slate-900 border-violet-800 border-opacity-50 shadow-2xl flex flex-col items-center justify-center mt-20">
             <div className="font-extralight  text-2xl  ">Welcome ,</div>
             {
               //@ts-ignore
@@ -36,12 +38,9 @@ export default function Home() {
             </div>
 
           </div>
-
-          <div className=" w-7/12 h-[85vh]  flex flex-col items-center justify-center mt-20  ">
-
+          {/* rightside */}
+          <div className=" w-[90%] h-[85vh]    xl:w-7/12  flex flex-col items-center justify-center mt-20  ">
             <Metrics easy={50} med={90} hard={70} />
-
-
           </div>
 
         </div>
