@@ -27,7 +27,7 @@ const Metrics = (props: any) => {
 
             <div className="flex    scale-100 max-[800px]:scale-[0.8] max-[600px]:scale-[0.6]   max-[600px]:relative max-[600px]:flex-col max-[600px]:top-4 min-[1495px]:scale-[0.9] h-96 items-center justify-center gap-4">
                 {/* esy */}
-                <div id="wrapper" className="center relative -top-20 max-[600px]:top-0 animate-pulse duration-1000">
+                <div id="wrapper" className="center relative -top-20 max-[600px]:top-0 animate-pulse">
                     <svg className="progress blue noselect" data-progress={44} x="0px" y="0px" viewBox="0 0 776 628">
                         <path className="track" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
                         <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
@@ -35,7 +35,7 @@ const Metrics = (props: any) => {
                     </svg>
                 </div>
                 {/* hard */}
-                <div id="wrapper" className="center scale-[1.2] max-[600px]:scale-[1.4] animate-pulse duration-4500 ">
+                <div id="wrapper" className="center scale-[1.2] max-[600px]:scale-[1.4] animate-pulse aduration  ">
                     <svg className="progress blue2 noselect" data-progress={props.hard} x="0px" y="0px" viewBox="0 0 776 628">
                         <path className="track" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
                         <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
@@ -44,7 +44,7 @@ const Metrics = (props: any) => {
                     </svg>
                 </div>
                 {/* med */}
-                <div id="wrapper" className="center relative -top-20 max-[600px]:top-0 animate-pulse duration-2000"  >
+                <div id="wrapper" className="center relative -top-20 max-[600px]:top-0 animate-pulse "  >
                     <svg className="progress blue3 noselect" data-progress={props.med} x="0px" y="0px" viewBox="0 0 776 628">
                         <path className="track" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
                         <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
