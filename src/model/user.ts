@@ -3,20 +3,19 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 
 export interface User extends Document {
-    username: string;
     fullName: string;
-    password: string;
     email: string;
+    battlewon: string,
+    eprobsolved: string,
+    hprobsolved: string,
+    mprobsolved: string,
+    totalattempted: string,
+    totalsolved: string,
+    totalunsolved: string,
 }
 
 // Updated User schema
 const UserSchema: Schema<User> = new mongoose.Schema({
-    username: {
-        type: String,
-        required: [true, 'Username is required'],
-        trim: true,
-        unique: true,
-    },
     email: {
         type: String,
         required: [true, 'Email is required'],
@@ -29,10 +28,39 @@ const UserSchema: Schema<User> = new mongoose.Schema({
         trim: true,
         unique: true,
     },
-
-    password: {
+    battlewon: {
         type: String,
-        required: [true, 'Password is required'],
+        default: '0'
+    },
+    eprobsolved: {
+        type: String,
+        default: '0'
+
+    },
+    hprobsolved: {
+        type: String,
+        default: '0'
+
+    },
+    mprobsolved: {
+        type: String,
+        default: '0'
+
+    },
+    totalattempted: {
+        type: String,
+        default: '0'
+
+    },
+    totalsolved: {
+        type: String,
+        default: '0'
+
+    },
+    totalunsolved: {
+        type: String,
+        default: '0'
+
     },
 
 

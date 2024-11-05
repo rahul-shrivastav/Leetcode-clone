@@ -23,7 +23,7 @@ export async function POST(request: Request) {
         console.error('Error registering question:', error);
         return Response.json(
             {
-                "success": false,
+                "success": false,   
                 "message": 'Error registering Problem',
             },
             { status: 500 }

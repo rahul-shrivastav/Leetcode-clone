@@ -24,11 +24,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 let response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email: user.email }),
+                    body: JSON.stringify({ email: user.email, fullName: user.name }),
                 });
                 const dbuser = await response.json()
                 console.log("fetching done", dbuser)
                 // @ts-ignore
+
                 user.data = dbuser;
                 if (!dbuser) {
                     console.log('dbfailed')
