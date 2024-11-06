@@ -13,7 +13,7 @@ import { CiMenuFries } from "react-icons/ci";
 
 const Navbar = () => {
     const session = useSession()
-    console.log(session)
+    // console.log(session)
     return (
         <div className=" max-h-[75px] shadow-lg   shadow-gray-900 absolute top-0 w-full overflow-x-clip  flex items-center justify-between    text-white border-b border-white border-opacity-10">
             <div className="scale-[0.65] ml-5 hover:scale-[0.73] transition-all duration-500 "><Logo /></div>
