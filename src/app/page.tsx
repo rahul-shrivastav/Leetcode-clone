@@ -4,14 +4,14 @@ import Navbar from "@/components/Global/Navbar";
 import InfiniteScroll from "@/components/Homepage/InfiniteScroll";
 import Metrics from "@/components/Homepage/Metrics";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 export default function Home() {
   const session = useSession()
-  // console.log(session, 'sesion')
 
   return (
     < >
-      <div className="w-full overflow-x-clip h-fit min-h-svh bg-black flex flex-col ">
+      {<div className="w-full overflow-x-clip h-fit min-h-svh bg-black flex flex-col ">
 
         <Navbar />
         <div className="w-full  text-white gap-0 md:gap-10 grow xl:flex-row  flex flex-col-reverse items-center justify-center bg-black">
@@ -46,7 +46,7 @@ export default function Home() {
 
         </div>
 
-      </div>
+      </div>}
 
     </>
 

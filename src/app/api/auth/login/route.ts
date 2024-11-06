@@ -7,13 +7,18 @@ export async function POST(request: Request) {
         const { email, fullName } = await request.json();
 
         const existingVerifiedUserByUsername: any = await UserModel.findOne({ email });
+        console.log(existingVerifiedUserByUsername)
         if (existingVerifiedUserByUsername) {
             return Response.json(existingVerifiedUserByUsername)
         }
         else {
             const newUser = new UserModel({ email, fullName });
-
-            await newUser.save();
+            console.log(newUser, "nuser")
+            try {
+                await newUser.save();         
+            } catch (error) {
+                console.log('Error signing in database')
+            }
 
             return Response.json(newUser);
         }
