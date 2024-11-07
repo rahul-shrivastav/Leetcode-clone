@@ -10,6 +10,7 @@ import { signOut } from 'next-auth/react'
 import { TbLogout } from "react-icons/tb";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, } from "@/components/ui/sheet"
 import { CiMenuFries } from "react-icons/ci";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
     const session = useSession()
@@ -26,10 +27,7 @@ const Navbar = () => {
                     session.status === "unauthenticated" &&
                     <div className=" border font-extralight px-7 py-2    shadow-violet-900   rounded-md border-violet-900 hover:bg-gradient-to-r hover:from-violet-800 hover:border-black hover:to-violet-950 duration-500 transition-all "><Authdialog /></div>
                 }
-                {/* {session.status === 'authenticated' &&
-                    <div className="hover:scale-[1.1] transition-all duration-700 text-2xl border-2 rounded-full border-purple-800"><BsPersonCircle />
-                    </div>
-                } */}
+
                 {session.status === 'authenticated' &&
                     <button className="text-2xl" onClick={() => { signOut() }} ><TbLogout /></button>
                 }

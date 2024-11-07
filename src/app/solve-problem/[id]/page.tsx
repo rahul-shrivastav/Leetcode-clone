@@ -18,7 +18,10 @@ export default function Page({ params }: any) {
                 body: JSON.stringify({ "id": params.id }),
             });
             const data = await response.json()
-            setproblem(data)
+            setTimeout(() => {
+
+                setproblem(data)
+            }, 300);
         }
         fetchproblem()
     }, [])
@@ -26,7 +29,10 @@ export default function Page({ params }: any) {
     console.log(problem, "Problem")
 
     if (!problem) {
-        return <div>Loading</div>
+        return <div className="w-screen h-screen bg-black flex items-center justify-center">
+            <Navbar />
+            <div className=" w-7 h-7 rounded-full border-t-2 animate-spin border-white"></div>
+        </div>
     }
     return (
         <div className="w-full h-screen overflow-x-auto overflow-y-clip text-slate-300 max-h-screen bg-black  flex flex-col items-center justify-end ">
