@@ -28,10 +28,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 const dbuser = await response.json()
                 console.log("fetching done", dbuser)
                 // @ts-ignore
-
                 user.data = dbuser;
+
                 if (!dbuser) {
                     console.log('dbfailed')
+                    return false
                 }
             } catch (error) {
                 console.error('Error submitting form:', error);

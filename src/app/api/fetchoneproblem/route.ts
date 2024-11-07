@@ -10,6 +10,6 @@ export async function POST(request: Request) {
         return Response.json(Prob)
     }
     catch (error) {
-        console.error('Error Getting the Problem :', error);
+        return Response.json({})
     };
 };
