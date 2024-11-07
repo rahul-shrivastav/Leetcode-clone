@@ -19,7 +19,6 @@ export default function Page({ params }: any) {
             });
             const data = await response.json()
             setTimeout(() => {
-
                 setproblem(data)
             }, 300);
         }
