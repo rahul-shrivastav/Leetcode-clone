@@ -8,9 +8,10 @@ const Versustab = () => {
                 <SheetContent className='text-white bg-black '>
                     <SheetHeader>
                         <SheetTitle>CHALLENGE <span className="px-2 text-violet-800 text-[25px]">1 v 1  </span> DSA BATTLE</SheetTitle>
-                        <SheetDescription>
-                            This action cannot be undone. This will permanently delete your account
-                            and remove your data from our servers.
+                        <SheetDescription >
+                            <div className="h-[80vh]  flex items-center justify-center">
+                                This feature is currently unavailable.
+                            </div>
                         </SheetDescription>
                     </SheetHeader>
                 </SheetContent>

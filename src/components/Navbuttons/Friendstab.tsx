@@ -9,8 +9,9 @@ const Friendstab = () => {
                     <SheetHeader>
                         <SheetTitle> YOUR<span className="mx-2 text-violet-800 text-[20px]">FRIENDS</span>   <span className="text-violet-800"></span></SheetTitle>
                         <SheetDescription>
-                            This action cannot be undone. This will permanently delete your account
-                            and remove your data from our servers.
+                            <div className="h-[80vh]  flex items-center justify-center">
+                                This feature is currently unavailable.
+                            </div>
                         </SheetDescription>
                     </SheetHeader>
                 </SheetContent>
