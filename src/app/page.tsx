@@ -11,8 +11,7 @@ export default function Home() {
   if (!session.data) {
     session.status = 'unauthenticated';
   }
-  console.log(session
-  )
+  console.log(session)
   return (
     < >
       {<div className="w-full overflow-x-clip h-fit min-h-svh bg-black flex flex-col ">

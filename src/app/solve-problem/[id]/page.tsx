@@ -4,11 +4,18 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/componen
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import CodeEditor from "@/components/Problempage/CodeEditor";
 import { FaLaptopCode } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export default function Page({ params }: any) {
     const desc = "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not use the same element twice.You can return the answer in any order."
     const [problem, setproblem] = useState(null)
+    let loginbg = '';
+    const session = useSession()
+
+    if (session.status === 'authenticated') {
+        loginbg = 'hidden '
+    }
 
     useEffect(() => {
         const fetchproblem = async () => {
@@ -74,7 +81,7 @@ export default function Page({ params }: any) {
 
                     <ResizablePanel className="">
                         <ResizablePanelGroup className="w-full" direction="vertical">
-                            <div className=" hidden relative h-full  w-full  text-white text-9xl flex flex-col gap-3 items-center justify-center">
+                            <div className={loginbg + "relative h-full  w-full  text-white text-9xl flex flex-col gap-3 items-center justify-center"}>
                                 <FaLaptopCode className="z-10" />
                                 <div className="z-10 text-[13px]"><span className="text-violet-500">Log In</span> to start solving problems</div>
                                 <div className="bg-[url('/images/code.png')] bg-cover z-0 w-full h-full absolute brightness-[0.45] opacity-40 top-0 left-0"></div>
