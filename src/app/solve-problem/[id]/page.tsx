@@ -4,17 +4,30 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/componen
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import CodeEditor from "@/components/Problempage/CodeEditor";
 import { FaLaptopCode } from "react-icons/fa";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useToast } from "@/hooks/use-toast"
 
 export default function Page({ params }: any) {
     const desc = "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not use the same element twice.You can return the answer in any order."
     const [problem, setproblem] = useState(null)
     let loginbg = '';
-    const session = useSession()
+    const session = useSession();
+    const [outputs, setoutputs] = useState(null);
+    const [eoutputs, seteoutputs] = useState([]);
+    const [inputs, setinputs] = useState([]);
+
+    const { toast } = useToast()
+
 
     if (session.status === 'authenticated') {
         loginbg = 'hidden '
+    }
+    const showtoast = (heading: string, desc: string) => {
+        toast({
+            title: heading,
+            description: desc
+        })
     }
 
     useEffect(() => {
@@ -25,14 +38,42 @@ export default function Page({ params }: any) {
                 body: JSON.stringify({ "id": params.id }),
             });
             const data = await response.json()
+
             setTimeout(() => {
-                setproblem(data)
+                setproblem(data);
+                setinputs(data[0].tcases.split(','))
+                seteoutputs(data[0].eoutputs.split(','))
+
             }, 300);
         }
         fetchproblem()
+
     }, [])
 
-    console.log(problem, "Problem")
+    useEffect(() => {
+        if (outputs) {
+            let passed = true;
+            // console.log(outputs)
+            for (let i = 0; i < 3; i++) {
+                let inp = inputs[i];
+                let op = outputs[inp][0]
+                if (op != eoutputs[i] + '\n') {
+                    passed = false;
+                    break;
+                }
+            }
+            if (passed) {
+                showtoast('Congratulations..!!', 'All test cases passed')
+            } else {
+                showtoast('Failed Attempt .', 'Some test cases failed')
+            }
+
+        }
+    }, [outputs])
+
+
+
+
 
     if (!problem) {
         return <div className="w-screen h-screen bg-black flex items-center justify-center">
@@ -41,7 +82,7 @@ export default function Page({ params }: any) {
         </div>
     }
     return (
-        <div className="w-full h-screen overflow-x-auto overflow-y-clip text-slate-300 max-h-screen bg-black  flex flex-col items-center justify-end ">
+        <div className="-z-20 w-full h-screen overflow-x-auto overflow-y-clip text-slate-300 max-h-screen bg-black  flex flex-col items-center justify-end ">
             <Navbar />
 
             <div className={"w-full flex items-center justify-center  border  border-slate-800  h-[83%]  absolute top-[100px] "}>
@@ -82,13 +123,13 @@ export default function Page({ params }: any) {
                     <ResizablePanel className="">
                         <ResizablePanelGroup className="w-full" direction="vertical">
                             <div className={loginbg + "relative h-full  w-full  text-white text-9xl flex flex-col gap-3 items-center justify-center"}>
-                                <FaLaptopCode className="z-10" />
+                                <div className=" animate-bounce duration-1000"><FaLaptopCode className="z-10" /></div>
                                 <div className="z-10 text-[13px]"><span className="text-violet-500">Log In</span> to start solving problems</div>
                                 <div className="bg-[url('/images/code.png')] bg-cover z-0 w-full h-full absolute brightness-[0.45] opacity-40 top-0 left-0"></div>
                             </div>
                             <ResizablePanel className=" w-full">
                                 <div className=" border-0 pl-2 scrollbar2 border-blue-400 h-[98%] overflow-y-scroll">
-                                    <CodeEditor />
+                                    <CodeEditor setoutputs={setoutputs} inputs={inputs} />
                                 </div>
                             </ResizablePanel>
 
@@ -103,16 +144,47 @@ export default function Page({ params }: any) {
                                             <TabsTrigger value="case3">Case 3</TabsTrigger>
                                         </TabsList>
                                         <TabsContent value="case1" className="flex flex-col items-center justify-center gap-5   px-7 m-0 ">
-                                            <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> nums = [1,2,3] </div>
-                                            <div className="w-full border rounded-lg color1 p-4 border-slate-700"> target = [1,2,3] </div>
+
+                                            <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Input : {inputs[0]} </div>
+                                            {
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Output : {outputs[inputs[0]][0]} </div>
+
+                                            }
+
+                                            {
+                                                //@ts-ignore
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Stdout :<br />{outputs[inputs[0]][1]} </div>
+
+
+                                            }
+
+
                                         </TabsContent>
                                         <TabsContent value="case2" className="flex flex-col items-center justify-center gap-5   px-7 m-0 ">
-                                            <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> nums = [1,22,3] </div>
-                                            <div className="w-full border rounded-lg color1 p-4 border-slate-700"> target = [1,2,3] </div>
+                                            <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Input : {inputs[1]} </div>
+                                            {
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Output : {outputs[inputs[1]][0]} </div>
+
+                                            }
+
+                                            {
+                                                //@ts-ignore
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Stdout :<br />{outputs[inputs[1]][1]} </div>
+
+                                            }
                                         </TabsContent>
                                         <TabsContent value="case3" className="flex flex-col items-center justify-center gap-5   px-7 m-0 ">
-                                            <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> nums = [1,2,33] </div>
-                                            <div className="w-full border rounded-lg color1 p-4 border-slate-700"> target = [1,2,3] </div>
+                                            <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Input : {inputs[2]} </div>
+                                            {
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Output : {outputs[inputs[2]][0]} </div>
+
+                                            }
+
+                                            {
+                                                //@ts-ignore
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Stdout :<br />{outputs[inputs[2]][1]} </div>
+
+                                            }
                                         </TabsContent>
 
 

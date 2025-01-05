@@ -16,7 +16,7 @@ const Problemtab = () => {
         }
         fetchproblem()
     }, [])
-    // console.log(problems)
+
     if (!problems) {
         return <div className="font-extralight ">Problems</div>
     }

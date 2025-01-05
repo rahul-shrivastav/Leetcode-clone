@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useToast } from "@/hooks/use-toast"
 import { AiOutlinePython } from "react-icons/ai";
 
@@ -11,133 +11,106 @@ import 'prismjs/components/prism-python';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-solarizedlight.css';
 
-const CodeEditor = () => {
+//@ts-ignore
+const CodeEditor = ({ setoutputs, inputs }) => {
     const { toast } = useToast()
     const [executing, setexecuting] = useState(false);
-    const [token, settoken] = useState('')
-    const [code, setCode] = useState(`def Solution():\n\t#'''You can define other functions before Solution functions'''\n\t#'''Write your code inside this Solution function and must return the answer'''\n\n\n\treturn\n\nprint(Solution())`);
-    useEffect(() => {
-        settoken('')
-    }, [code])
+    const [code, setCode] = useState(`'''You can define other functions before Solution functions'''\n'''Write your code inside this Solution function and must return the answer'''\n\ndef Solution(input):\n\n\n\n\n\n\n\n    return input\n`);
 
-    const fetchresults = async (tokenn: any) => {
-        if (!tokenn) {
-            return
+    let outputs: any = {};
+
+    const showtoast = (heading: string, desc: string) => {
+        toast({
+            title: heading,
+            description: desc
+        })
+    }
+
+    const runcode = async (code: string, inputs: string) => {
+        let acode = code + `\nprint(f'@{Solution(${inputs})}')`
+        if (!code) {
+            acode = '';
         }
-        setexecuting(true)
-        console.log('fcalled')
-        const url = `https://judge0-ce.p.rapidapi.com/submissions/${tokenn}?base64_encoded=true&fields=*`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2,
-                // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
-                'x-rapidapi-host': 'judge0-ce.p.rapidapi.com'
-            }
-        };
-
         try {
-            // @ts-ignore
-            const response = await fetch(url, options)
-            const result = await response.json()
-                .then((result) => {
-                    setexecuting(false);
-                    console.log(result)
-                    console.log(tokenn)
-                    if (result.source_code) {
-                        toast({
-                            title: `${result.status.description}`,
-                            description: '',
-                        })
-                    }
+            const url = process.env.NEXT_PUBLIC_SUBMIT_CODE_API + '/execute';
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "code": acode
                 })
+            };
+            setexecuting(true)
 
+            const response = await fetch(url, options);
 
-        } catch (error) {
-            setexecuting(false)
-            toast({
-                title: `${error}`,
-                description: `fetcherror There will be no longer submissions on Judge0 server. Try tomorrow.`,
-            })
-        }
-    }
+            const result = await response.json();
+            // console.log(result)
+            if (result.output) {
+                let idx = result.output.indexOf('@')
+                setexecuting(false)
 
-    const submitCode = async (code: any, expected: string = '2') => {
-        try {
-            if (token) {
-                let result = await fetchresults(token)
-            }
-            else {
-                console.log('scalled')
-                const url = 'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=false&fields=*';
-
-                const options = {
-                    method: 'POST',
-                    headers: {
-                        // 'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_1, //gai
-                        'x-rapidapi-key': process.env.NEXT_PUBLIC_RAPID_API_2,
-                        'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        language_id: 92,
-                        source_code: btoa(code),
-                        expected_output: btoa(expected),
-                    })
+                if (result.output.slice(0, idx)) {
+                    return [result.output.slice(idx + 1), result.output.slice(0, idx)]
+                } else {
+                    return [result.output.slice(idx + 1), 'No Standard Output']
                 }
-
-                // @ts-ignore
-                const response = await fetch(url, options);
-                const data = await response.json()
-                    .then((data) => {
-                        console.log(data)
-                        if (data.message) {
-                            toast({
-                                title: `Daily Submission Limit Reached`,
-                                description: ` There will be no longer submissions on Judge0 server. Try tomorrow.`,
-                            })
-
-                        }
-                        else {
-
-                            settoken(data.token);
-                        }
-                    })
-                    .then(async () => {
-                        let result = await fetchresults(token)
-                    })
             }
+            if (result.error) {
+                setoutputs(null)
+                showtoast(result.error, result.details)
+            }
+            setexecuting(false)
 
         } catch (error) {
-            toast({
-                title: `${error}`,
-                description: `${error}`,
-            })
-        }
-    }
+            showtoast("Code Execution Server not Responding", 'Please try in 1 minute')
+            setoutputs(null)
 
+            setexecuting(false)
+        }
+
+    }
+    const fetchoutputs = async () => {
+        let v1 = await runcode(code, inputs[0])
+        if (v1) {
+            outputs[inputs[0]] = v1;
+            let v2 = await runcode(code, inputs[1]);
+            if (v2) {
+                outputs[inputs[1]] = v2;
+                let v3 = await runcode(code, inputs[2]);
+                if (v3) {
+                    outputs[inputs[2]] = v3;
+                }
+            }
+        }
+        if (Object.keys(outputs).length < 3) {
+            setoutputs(null)
+        } else {
+            setoutputs(outputs)
+        }
+
+    }
 
     return (
         <div>
-            <div className=" flex   items-center justify-center gap-1  w-full pt-2 ">
+            <div className=" flex items-center justify-center gap-1  w-full pt-2 ">
                 {!executing &&
                     <div className="flex gap-2 h-8">
-                        <button onClick={() => { submitCode(code) }} className="border border-white border-opacity-50  font-thin  hover:font-medium text-white hover:bg-white hover:text-black w-24  py-1 rounded-sm">SUBMIT</button>
-                        {/* <button onClick={() => { fetchresults(token); }} className="border  text-white hover:bg-white hover:text-black w-24  py-1 rounded-sm">Submit</button> */}
+                        <button onClick={fetchoutputs}
+                            className="border border-white border-opacity-50  font-thin  hover:font-medium text-white hover:bg-white hover:text-black w-24  py-1 rounded-sm">
+                            SUBMIT</button>
 
-                        <div className="absolute right-5 text-4xl text-white">
+                        <div className="absolute right-5 text-4xl text-white animate-pulse">
                             <AiOutlinePython />
-
-
-
 
                         </div>
 
                     </div>
                 }
-                {executing && <div className="h-8 pt-1"><div className="loader"></div></div>
-
-                }
+                {executing && <div className="h-8 pt-1"><div className="loader"></div></div>}
 
             </div>
             <Editor
