@@ -4,7 +4,7 @@ export interface Problem extends Document {
     name: string;
     difficulty: string;
     description: string;
-    examples: string;
+    eoutputs: string;
     tcases: string;
 }
 
@@ -12,7 +12,7 @@ export interface Problem extends Document {
 const ProblemSchema: Schema<Problem> = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Username is required'],
+        required: [true, 'Name of problem is required'],
         trim: true,
         unique: true,
     },
@@ -26,7 +26,7 @@ const ProblemSchema: Schema<Problem> = new mongoose.Schema({
         type: String,
         required: true,
     },
-    examples: {
+    eoutputs: {
         type: String,
         required: true,
     },

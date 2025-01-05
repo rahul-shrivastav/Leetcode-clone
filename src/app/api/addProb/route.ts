@@ -5,15 +5,14 @@ export async function POST(request: Request) {
     await dbConnect();
 
     try {
-        const { name, difficulty, description, examples, tcases } = await request.json();
-
+        const { name, difficulty, description, eoutputs, tcases } = await request.json();
 
         const newProb = new ProblemModel({
             name,
             difficulty,
             description,
-            examples,
-            tcases
+            tcases,
+            eoutputs
         });
 
         await newProb.save();

@@ -5,13 +5,13 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface User extends Document {
     fullName: string;
     email: string;
-    battlewon: string,
-    eprobsolved: string,
-    hprobsolved: string,
-    mprobsolved: string,
-    totalattempted: string,
-    totalsolved: string,
-    totalunsolved: string,
+    battlewon: Number,
+    eprobsolved: Number,
+    hprobsolved: Number,
+    mprobsolved: Number,
+    totalattempted: Number,
+    totalsolved: Number,
+    totalunsolved: Number,
 }
 
 // Updated User schema
@@ -29,37 +29,37 @@ const UserSchema: Schema<User> = new mongoose.Schema({
         unique: true,
     },
     battlewon: {
-        type: String,
-        default: '0'
+        type: Number,
+        default: 0
     },
     eprobsolved: {
-        type: String,
-        default: '0'
+        type: Number,
+        default: 0
 
     },
     hprobsolved: {
-        type: String,
-        default: '0'
+        type: Number,
+        default: 0
 
     },
     mprobsolved: {
-        type: String,
-        default: '0'
+        type: Number,
+        default: 0
 
     },
     totalattempted: {
-        type: String,
-        default: '0'
+        type: Number,
+        default: 0
 
     },
     totalsolved: {
-        type: String,
-        default: '0'
+        type: Number,
+        default: 0
 
     },
     totalunsolved: {
-        type: String,
-        default: '0'
+        type: Number,
+        default: 0
 
     },
 

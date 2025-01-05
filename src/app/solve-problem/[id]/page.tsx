@@ -9,7 +9,6 @@ import { useSession } from "next-auth/react";
 import { useToast } from "@/hooks/use-toast"
 
 export default function Page({ params }: any) {
-    const desc = "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.You may assume that each input would have exactly one solution, and you may not use the same element twice.You can return the answer in any order."
     const [problem, setproblem] = useState(null)
     let loginbg = '';
     const session = useSession();
@@ -18,6 +17,7 @@ export default function Page({ params }: any) {
     const [inputs, setinputs] = useState([]);
 
     const { toast } = useToast()
+    console.log(session)
 
 
     if (session.status === 'authenticated') {
@@ -41,8 +41,8 @@ export default function Page({ params }: any) {
 
             setTimeout(() => {
                 setproblem(data);
-                setinputs(data[0].tcases.split(','))
-                seteoutputs(data[0].eoutputs.split(','))
+                setinputs(data[0].tcases.split('_'))
+                seteoutputs(data[0].eoutputs.split('_'))
 
             }, 300);
         }
@@ -72,7 +72,7 @@ export default function Page({ params }: any) {
     }, [outputs])
 
 
-
+    console.log(problem)
 
 
     if (!problem) {
@@ -91,27 +91,25 @@ export default function Page({ params }: any) {
 
                     <ResizablePanel className=" ">
                         <div className=" pb-5 w-full h-full  flex flex-col items-center justify-start gap-4 overflow-y-scroll scrollbar2 min-w-[370px] ">
-                            <div className="w-11/12 p-4 rounded-md border-slate-400 text-center text-violet-600 font-bold text-2xl border   mt-5">K-Queen Problem</div>
-                            <div className="w-11/12  rounded-2xl border border-slate-700 text-left  p-4"><span className="font-bold text-slate-500">Description :</span> <br /><span>{desc}</span></div>
+                            <div className="w-11/12 p-4 rounded-md border-slate-400 text-center text-violet-600 font-bold text-2xl border   mt-5">{problem[0]['name']}</div>
+
+                            <div className="w-11/12  rounded-2xl border border-slate-700 text-left  p-4"><span className="font-bold text-slate-500">Description :</span> <br /><span>{problem[0]['description']}</span></div>
+
                             <div className="w-11/12 rounded-2xl  border border-slate-700 text-left  p-4">
                                 <span className=" text-slate-500 font-bold">Example 1 :</span><br />
-                                Input: nums = [2,7,11,15], target = 9<br />
-                                Output: [0,1]<br />
-                                Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+                                <div className="my-2"><b className="my-9">Input :</b> {inputs[0]}<br /></div>
+                                <b>Expected Output : </b>{eoutputs[0]}<br />
                             </div>
-                            <div className="w-11/12  rounded-2xl  border border-slate-700 text-left  p-4">
-                                <span className=" text-slate-500 font-bold">Example 2 :</span><br />
-                                Input: nums = [2,7,11,15], target = 9<br />
-                                Output: [0,1]<br />
-                                Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+                            <div className="w-11/12 rounded-2xl  border border-slate-700 text-left  p-4">
+                                <span className=" text-slate-500 font-bold">Example 1 :</span><br />
+                                <div className="my-2"><b className="my-9">Input :</b> {inputs[1]}<br /></div>
+                                <b>Expected Output : </b>{eoutputs[1]}<br />
                             </div>
-                            <div className="w-11/12  rounded-2xl  border border-slate-700 text-left  p-4">
-                                <span className=" text-slate-500 font-bold">Example 3 :</span><br />
-                                Input: nums = [2,7,11,15], target = 9<br />
-                                Output: [0,1]<br />
-                                Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+                            <div className="w-11/12 rounded-2xl  border border-slate-700 text-left  p-4">
+                                <span className=" text-slate-500 font-bold">Example 1 :</span><br />
+                                <div className="my-2"><b className="my-9">Input :</b> {inputs[2]}<br /></div>
+                                <b>Expected Output : </b>{eoutputs[2]}<br />
                             </div>
-
 
 
                         </div>
@@ -153,6 +151,12 @@ export default function Page({ params }: any) {
 
                                             {
                                                 //@ts-ignore
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Expected Output : {eoutputs[0]} </div>
+
+
+                                            }
+                                            {
+                                                //@ts-ignore
                                                 outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Stdout :<br />{outputs[inputs[0]][1]} </div>
 
 
@@ -169,6 +173,12 @@ export default function Page({ params }: any) {
 
                                             {
                                                 //@ts-ignore
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Expected Output : {eoutputs[1]} </div>
+
+
+                                            }
+                                            {
+                                                //@ts-ignore
                                                 outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Stdout :<br />{outputs[inputs[1]][1]} </div>
 
                                             }
@@ -182,9 +192,16 @@ export default function Page({ params }: any) {
 
                                             {
                                                 //@ts-ignore
+                                                outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Expected Output : {eoutputs[2]} </div>
+
+
+                                            }
+                                            {
+                                                //@ts-ignore
                                                 outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Stdout :<br />{outputs[inputs[2]][1]} </div>
 
                                             }
+
                                         </TabsContent>
 
 
