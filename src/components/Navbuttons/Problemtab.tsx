@@ -3,21 +3,21 @@ import Problems from "../Problempage/Problems";
 import ProblemNav from "../Problempage/ProblemNav";
 import { useEffect, useState } from "react";
 
+//@ts-ignore
 const Problemtab = () => {
-    const [problems, setproblems] = useState(null)
-
+    const [probs, setprob] = useState(null)
     useEffect(() => {
         const fetchproblem = async () => {
             const response = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/fetchproblems`, {
                 method: 'GET',
             });
             const data = await response.json()
-            setproblems(data.allProb)
+            setprob(data)
         }
         fetchproblem()
     }, [])
 
-    if (!problems) {
+    if (!probs) {
         return <div className="font-extralight ">Problems</div>
     }
     return (
@@ -35,7 +35,7 @@ const Problemtab = () => {
                         <ProblemNav />
                         {
                             //@ts-ignore
-                            problems.map((problem) => {
+                            probs.allProb.map((problem) => {
                                 return <Problems key={problem._id} difficulty={problem.difficulty} name={problem.name} id={problem._id} solved='' />
                             })
                         }

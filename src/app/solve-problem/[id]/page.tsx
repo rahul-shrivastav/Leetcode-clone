@@ -7,18 +7,21 @@ import { FaLaptopCode } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useToast } from "@/hooks/use-toast"
+import { IoMdDoneAll } from "react-icons/io";
+import { set } from "mongoose";
+
 
 export default function Page({ params }: any) {
     const [problem, setproblem] = useState(null)
     let loginbg = '';
-    const session = useSession();
+    let session = useSession();
     const [outputs, setoutputs] = useState(null);
     const [eoutputs, seteoutputs] = useState([]);
     const [inputs, setinputs] = useState([]);
+    const [solved, setsolved] = useState(false);
 
     const { toast } = useToast()
-    console.log(session)
-
+    // console.log(session)
 
     if (session.status === 'authenticated') {
         loginbg = 'hidden '
@@ -29,6 +32,15 @@ export default function Page({ params }: any) {
             description: desc
         })
     }
+    useEffect(() => {
+        if (problem) {
+            //@ts-ignore
+            if (JSON.parse(localStorage.getItem('user')).questionsolved.includes(problem[0]._id)) {
+                setsolved(true)
+            }
+        }
+
+    })
 
     useEffect(() => {
         const fetchproblem = async () => {
@@ -51,6 +63,8 @@ export default function Page({ params }: any) {
     }, [])
 
     useEffect(() => {
+
+
         if (outputs) {
             let passed = true;
             // console.log(outputs)
@@ -63,16 +77,57 @@ export default function Page({ params }: any) {
                 }
             }
             if (passed) {
+
                 showtoast('Congratulations..!!', 'All test cases passed')
+                //@ts-ignore
+                let user = JSON.parse(localStorage.getItem('user'))
+                //@ts-ignore
+                if (!(user.questionsolved.includes(problem[0]._id))) {
+                    const req = fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/increment`, {
+                        method: 'POST',
+                        headers: { "Content-Type": "application/json" },
+                        //@ts-ignore
+                        body: JSON.stringify({ "pid": problem[0]._id, "uid": session.data.user.data._id, "ptype": problem[0].difficulty }),
+                    });
+
+                    //@ts-ignore
+                    //@ts-ignore
+                    user.questionsolved.push(problem[0]._id)
+                    user.totalsolved = user.totalsolved + 1
+                    user.totalunsolved = user.totalunsolved - 1
+
+                    //@ts-ignore
+                    if (problem[0].difficulty === 'Easy') {
+                        user.eprobsolved = user.eprobsolved + 1
+                    }
+                    //@ts-ignore
+                    else if (problem[0].difficulty === 'Medium') {
+                        user.mprobsolved = user.mprobsolved + 1
+                    }
+                    //@ts-ignore
+                    else if (problem[0].difficulty === 'Hard') {
+                        user.hprobsolved = user.hprobsolved + 1
+                    }
+                    user.totalattempted = user.totalattempted + 1
+                    localStorage.setItem('user', JSON.stringify(user))
+                }
             } else {
                 showtoast('Failed Attempt .', 'Some test cases failed')
+                fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/increment`, {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    //@ts-ignore
+                    body: JSON.stringify({ "pid": 0, "uid": session.data.user.data._id, "ptype": 'null' }),
+                });
+                //@ts-ignore
+                let user = JSON.parse(localStorage.getItem('user'))
+                user.totalattempted = user.totalattempted + 1
+                localStorage.setItem('user', JSON.stringify(user))
+
             }
 
         }
     }, [outputs])
-
-
-    console.log(problem)
 
 
     if (!problem) {
@@ -91,7 +146,11 @@ export default function Page({ params }: any) {
 
                     <ResizablePanel className=" ">
                         <div className=" pb-5 w-full h-full  flex flex-col items-center justify-start gap-4 overflow-y-scroll scrollbar2 min-w-[370px] ">
-                            <div className="w-11/12 p-4 rounded-md border-slate-400 text-center text-violet-600 font-bold text-2xl border   mt-5">{problem[0]['name']}</div>
+                            <div className="w-11/12 p-4 relative rounded-md border-slate-400 text-center text-violet-600 font-bold text-2xl border   mt-5">
+                                {problem[0]['name']}
+                                {solved && <div className=" absolute right-5 top-[20px] text-white"><IoMdDoneAll /></div>}
+
+                            </div>
 
                             <div className="w-11/12  rounded-2xl border border-slate-700 text-left  p-4"><span className="font-bold text-slate-500">Description :</span> <br /><span>{problem[0]['description']}</span></div>
 
@@ -158,7 +217,6 @@ export default function Page({ params }: any) {
                                             {
                                                 //@ts-ignore
                                                 outputs && <div className="w-full  border rounded-lg color1 p-4 border-slate-700"> Stdout :<br />{outputs[inputs[0]][1]} </div>
-
 
                                             }
 

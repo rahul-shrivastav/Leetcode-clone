@@ -1,7 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-
-
 export interface User extends Document {
     fullName: string;
     email: string;
@@ -12,6 +10,7 @@ export interface User extends Document {
     totalattempted: Number,
     totalsolved: Number,
     totalunsolved: Number,
+    questionsolved: Array<any>
 }
 
 // Updated User schema
@@ -59,9 +58,17 @@ const UserSchema: Schema<User> = new mongoose.Schema({
     },
     totalunsolved: {
         type: Number,
-        default: 0
+        default: 4
 
     },
+    questionsolved: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Problems',
+            default: []
+        }
+
+    ]
 
 
 });

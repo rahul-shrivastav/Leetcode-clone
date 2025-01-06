@@ -11,8 +11,8 @@ import { TbLogout } from "react-icons/tb";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, } from "@/components/ui/sheet"
 import { CiMenuFries } from "react-icons/ci";
 import { useRouter } from "next/router";
-
-const Navbar = () => {
+//@ts-ignore
+const Navbar = ({ problems }) => {
     const session = useSession()
     // console.log(session)
     return (
