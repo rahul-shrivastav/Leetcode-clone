@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useToast } from "@/hooks/use-toast"
 import { IoMdDoneAll } from "react-icons/io";
-import { set } from "mongoose";
 
 
 export default function Page({ params }: any) {
@@ -25,7 +24,16 @@ export default function Page({ params }: any) {
 
     if (session.status === 'authenticated') {
         loginbg = 'hidden '
+        if (!localStorage.getItem('user')) {
+            //@ts-ignore
+            localStorage.setItem('user', JSON.stringify(session.data.user.data))
+        }
+
     }
+
+
+
+
     const showtoast = (heading: string, desc: string) => {
         toast({
             title: heading,
@@ -35,7 +43,7 @@ export default function Page({ params }: any) {
     useEffect(() => {
         if (problem) {
             //@ts-ignore
-            if (JSON.parse(localStorage.getItem('user')).questionsolved.includes(problem[0]._id)) {
+            if (session.status === 'authenticated' && localStorage.getItem('user') != null && JSON.parse(localStorage.getItem('user')).questionsolved.includes(problem[0]._id)) {
                 setsolved(true)
             }
         }
@@ -63,7 +71,6 @@ export default function Page({ params }: any) {
     }, [])
 
     useEffect(() => {
-
 
         if (outputs) {
             let passed = true;

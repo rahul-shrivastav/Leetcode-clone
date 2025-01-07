@@ -19,8 +19,9 @@ export default function Home() {
     if (!localStorage.getItem('user')) {
       localStorage.setItem('user', JSON.stringify(session.data.user.data));
     }
-
   }
+
+
   useEffect(() => {
     const fetchproblem = async () => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/fetchproblems`, {

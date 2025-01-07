@@ -8,7 +8,7 @@ import Notification from "../Navbuttons/Notification";
 import { useSession } from "next-auth/react";
 import { signOut } from 'next-auth/react'
 import { TbLogout } from "react-icons/tb";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTrigger, } from "@/components/ui/sheet"
 import { CiMenuFries } from "react-icons/ci";
 //@ts-ignore
 const Navbar = () => {
@@ -28,7 +28,7 @@ const Navbar = () => {
                 }
 
                 {session.status === 'authenticated' &&
-                    <button className="text-2xl" onClick={() => { signOut() }} ><TbLogout /></button>
+                    <button className="text-2xl" onClick={() => { signOut(); localStorage.removeItem('user') }} ><TbLogout /></button>
                 }
             </div>
             <div className="hidden max-[550px]:flex">
