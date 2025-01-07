@@ -1,5 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
+## CodeArena
+Welcome to CodeArena – a platform for practicing and solving coding problems, similar to LeetCode. Built with Next.js 14, MongoDB, and NextAuth, CodeArena provides a smooth user experience to enhance your coding skills and connect with others.
 ## Getting Started
 
 First, run the development server:
