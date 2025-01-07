@@ -33,6 +33,7 @@ const CodeEditor = ({ setoutputs, inputs }) => {
         }
         try {
             const url = process.env.NEXT_PUBLIC_SUBMIT_CODE_API2 + '/execute';
+            console.log(process.env.NEXT_PUBLIC_SUBMIT_CODE_API2)
 
             const options = {
                 method: 'POST',
