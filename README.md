@@ -18,8 +18,22 @@ Install the required dependencies by running:
 ```bash
 npm install
 ```
+### 3. Setup Environment Variables
 
-### 2. Run Dev server Locally
+To run this project, you will need to add the following environment variables to your .env file
+```bash
+MONGO_DB_URI  
+AUTH_SECRET  
+GOOGLE_CLIENT_ID  
+GOOGLE_CLIENT_SECRET  
+NODE_ENV
+NEXT_PUBLIC_NEXTAUTH_URL
+NEXTAUTH_URL
+NEXT_PUBLIC_SUBMIT_CODE_API2  
+```
+A sample .evn file is also provided in the repository.
+
+### 4. Run Dev server Locally
 
 First, run the development server:
 
@@ -39,14 +53,13 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Resources
 
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Sample Screenshots
 ![Screenshot 2024-09-08 035903](https://github.com/user-attachments/assets/4055d2d1-a55b-425c-9af4-5e8c73c0b23b)
