@@ -3,6 +3,24 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 Welcome to CodeArena – a platform for practicing and solving coding problems, similar to LeetCode. Built with Next.js 14, MongoDB, and NextAuth, CodeArena provides a smooth user experience to enhance your coding skills and connect with others.
 ## Getting Started
 
+### 1. Clone the Repository
+First, clone the repository to your local machine:
+
+
+```bash
+git clone https://github.com/rahul-shrivastav/Leetcode-clone.git
+```
+
+
+### 2. Install Dependencies
+Install the required dependencies by running:
+
+```bash
+npm install
+```
+
+### 2. Run Dev server Locally
+
 First, run the development server:
 
 ```bash
@@ -29,12 +47,6 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Sample Screenshots
 ![Screenshot 2024-09-08 035903](https://github.com/user-attachments/assets/4055d2d1-a55b-425c-9af4-5e8c73c0b23b)
