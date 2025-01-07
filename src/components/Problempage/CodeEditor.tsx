@@ -32,7 +32,7 @@ const CodeEditor = ({ setoutputs, inputs }) => {
             acode = '';
         }
         try {
-            const url = process.env.NEXT_PUBLIC_SUBMIT_CODE_API + '/execute';
+            const url = process.env.NEXT_PUBLIC_SUBMIT_CODE_API2 + '/execute';
 
             const options = {
                 method: 'POST',
@@ -68,7 +68,7 @@ const CodeEditor = ({ setoutputs, inputs }) => {
         } catch (error) {
             showtoast("Code Execution Server not Responding", 'Please try in 1 minute')
             setoutputs(null)
-
+            console.log(error)
             setexecuting(false)
         }
 
