@@ -1,6 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-## CodeArena
-Welcome to CodeArena – a platform for practicing and solving coding problems, similar to LeetCode. Built with Next.js 14, MongoDB, and NextAuth, CodeArena provides a smooth user experience to enhance your coding skills and connect with others.
+# CodeArena 
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) 
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) 
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) 
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) 
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) 
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+
+
+
+Welcome to CodeArena – a platform for practicing and solving coding problems, similar to LeetCode. Built with Next.js 14, MongoDB, and NextAuth, CodeArena provides a smooth user experience to enhance your coding skills and connect with others.    
+
+[![VISIT](https://img.shields.io/badge/-VISIT-blue?style=for-the-badge)](https://chatappmern-5ski.onrender.com)
+
+## Tech Stack
+
+- ` Next.js ` : A React-based framework for building server-rendered and static web applications, offering features like routing, API handling, and optimized performance.
+- ` React.js ` : A JavaScript library for building dynamic user interfaces with reusable components.
+- ` Node.js `: A server-side runtime that allows running JavaScript on the backend.
+- ` MongoDB ` : A NoSQL database that stores data in flexible, JSON-like documents.
+- ` Tailwind-CSS` : A utility-first CSS framework for building custom, responsive designs quickly by composing classes directly in HTML.
+
+
 ## Getting Started
 
 ### 1. Clone the Repository
@@ -46,12 +66,16 @@ pnpm dev
 # or
 bun dev
 ```
+### 4. Setup the python code execution server locally 
+Follow the readme.md file in the given repo to setup locally :
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Visit%20Repo-blue?style=for-the-badge&logo=github)](https://github.com/rahul-shrivastav/Python-Code-Execution-Server)                                     
 
+<br>
+
+After setting up python server locally , open port `3000` on your `localhost` with your browser to see the result.
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Resources
 
@@ -60,6 +84,7 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
+<br><br>
 
 ## Sample Screenshots
 ![Screenshot 2024-09-08 035903](https://github.com/user-attachments/assets/4055d2d1-a55b-425c-9af4-5e8c73c0b23b)
