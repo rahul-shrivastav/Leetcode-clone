@@ -10,7 +10,7 @@
 
 Welcome to CodeArena – a platform for practicing and solving coding problems, similar to LeetCode. Built with Next.js 14, MongoDB, and NextAuth, CodeArena provides a smooth user experience to enhance your coding skills and connect with others.    
 
-[![VISIT](https://img.shields.io/badge/-VISIT-blue?style=for-the-badge)](https://chatappmern-5ski.onrender.com)
+[![VISIT](https://img.shields.io/badge/-VISIT-blue?style=for-the-badge)](https://codearena-pi.vercel.app/)
 
 ## Tech Stack
 
