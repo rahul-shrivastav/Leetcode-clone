@@ -1,0 +1,5 @@
+flask
+redis
+pymongo
+gunicorn
+python-dotenv
