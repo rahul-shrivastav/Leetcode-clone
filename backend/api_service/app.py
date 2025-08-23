@@ -3,9 +3,11 @@ import json,uuid
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from flask_cors import CORS
 
 load_dotenv()  
 app = Flask(__name__)
+CORS(app)
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 r = redis.Redis.from_url(REDIS_URL)
@@ -17,9 +19,13 @@ submissions = db["submissions"]
 
 @app.route("/submit", methods=["POST"])
 def submit_code():
+    print("Submitting code...")
     try:
         data = request.get_json()
         code = data.get("code")
+        inputs = data.get("inputs", [])
+        print(inputs)
+
 
         if not code:
             return jsonify({"stdout": '',"exit_code": 124,  "stderr" : "No code given."})
@@ -28,6 +34,7 @@ def submit_code():
         job = {
             "submission_id": submission_id,
             "code": code,
+            "inputs": inputs,
         }
 
         r.lpush("submissions_queue", json.dumps(job))

@@ -16,14 +16,14 @@ import { useToast } from "@/hooks/use-toast";
 import { IoMdDoneAll } from "react-icons/io";
 
 export default function Page({ params }: any) {
-    const [problem, setproblem] = useState(null);
     let loginbg = "";
     let session = useSession();
+    const [problem, setproblem] = useState(null);
     const [outputs, setoutputs] = useState(null);
     const [eoutputs, seteoutputs] = useState([]);
     const [inputs, setinputs] = useState([]);
     const [solved, setsolved] = useState(false);
-
+    const [rerender, setrerender] = useState(1);
     const { toast } = useToast();
     // console.log(session)
 
@@ -58,7 +58,7 @@ export default function Page({ params }: any) {
             }
         }
     });
-
+    // console.log(outputs);
     useEffect(() => {
         const fetchproblem = async () => {
             const response = await fetch(
@@ -74,29 +74,19 @@ export default function Page({ params }: any) {
                 }
             );
             const data = await response.json();
-
             setTimeout(() => {
                 setproblem(data);
-                setinputs(data[0].tcases.split("_"));
-                seteoutputs(data[0].eoutputs.split("_"));
-            }, 300);
+                setinputs(data[0].tcases);
+                seteoutputs(data[0].eoutputs);
+            }, 0);
         };
         fetchproblem();
     }, []);
-
+    // console.log(eoutputs);
     useEffect(() => {
+        console.log(outputs, eoutputs);
         if (outputs) {
-            let passed = true;
-            // console.log(outputs)
-            for (let i = 0; i < 3; i++) {
-                let inp = inputs[i];
-                let op = outputs[inp][0];
-                if (op != eoutputs[i] + "\n") {
-                    passed = false;
-                    break;
-                }
-            }
-            if (passed) {
+            if (outputs.slice(0, -1) === eoutputs) {
                 showtoast("Congratulations..!!", "All test cases passed");
                 //@ts-ignore
                 let user = JSON.parse(localStorage.getItem("user"));
@@ -135,6 +125,7 @@ export default function Page({ params }: any) {
                     localStorage.setItem("user", JSON.stringify(user));
                 }
             } else {
+                console.log("not pass");
                 showtoast("Failed Attempt .", "Some test cases failed");
                 fetch(
                     `${
@@ -159,7 +150,7 @@ export default function Page({ params }: any) {
                 localStorage.setItem("user", JSON.stringify(user));
             }
         }
-    }, [outputs]);
+    }, [outputs, rerender]);
 
     if (!problem) {
         return (
@@ -204,11 +195,12 @@ export default function Page({ params }: any) {
                                 </span>
                                 <br />
                                 <div className="my-2">
-                                    <b className="my-9">Input :</b> {inputs[0]}
+                                    <b className="my-9">Input :</b>{" "}
+                                    {inputs.split("_")[0]}
                                     <br />
                                 </div>
                                 <b>Expected Output : </b>
-                                {eoutputs[0]}
+                                {eoutputs.split("_")[0]}
                                 <br />
                             </div>
                             <div className="w-11/12 rounded-2xl  border border-slate-700 text-left  p-4">
@@ -217,11 +209,12 @@ export default function Page({ params }: any) {
                                 </span>
                                 <br />
                                 <div className="my-2">
-                                    <b className="my-9">Input :</b> {inputs[1]}
+                                    <b className="my-9">Input :</b>{" "}
+                                    {inputs.split("_")[1]}
                                     <br />
                                 </div>
                                 <b>Expected Output : </b>
-                                {eoutputs[1]}
+                                {eoutputs.split("_")[1]}
                                 <br />
                             </div>
                             <div className="w-11/12 rounded-2xl  border border-slate-700 text-left  p-4">
@@ -230,11 +223,12 @@ export default function Page({ params }: any) {
                                 </span>
                                 <br />
                                 <div className="my-2">
-                                    <b className="my-9">Input :</b> {inputs[2]}
+                                    <b className="my-9">Input :</b>{" "}
+                                    {inputs.split("_")[2]}
                                     <br />
                                 </div>
                                 <b>Expected Output : </b>
-                                {eoutputs[2]}
+                                {eoutputs.split("_")[2]}
                                 <br />
                             </div>
                         </div>
@@ -269,6 +263,7 @@ export default function Page({ params }: any) {
                                     <CodeEditor
                                         setoutputs={setoutputs}
                                         inputs={inputs}
+                                        setrerender={setrerender}
                                     />
                                 </div>
                             </ResizablePanel>
@@ -301,13 +296,15 @@ export default function Page({ params }: any) {
                                         >
                                             <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                 {" "}
-                                                Input : {inputs[0]}{" "}
+                                                Input : {
+                                                    inputs.split("_")[0]
+                                                }{" "}
                                             </div>
                                             {outputs && (
                                                 <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                     {" "}
                                                     Output :{" "}
-                                                    {outputs[inputs[0]][0]}{" "}
+                                                    {outputs.split("_")[0]}{" "}
                                                 </div>
                                             )}
 
@@ -317,20 +314,10 @@ export default function Page({ params }: any) {
                                                     <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                         {" "}
                                                         Expected Output :{" "}
-                                                        {eoutputs[0]}{" "}
-                                                    </div>
-                                                )
-                                            }
-                                            {
-                                                //@ts-ignore
-                                                outputs && (
-                                                    <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
-                                                        {" "}
-                                                        Stdout :<br />
                                                         {
-                                                            outputs[
-                                                                inputs[0]
-                                                            ][1]
+                                                            eoutputs.split(
+                                                                "_"
+                                                            )[0]
                                                         }{" "}
                                                     </div>
                                                 )
@@ -342,13 +329,15 @@ export default function Page({ params }: any) {
                                         >
                                             <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                 {" "}
-                                                Input : {inputs[1]}{" "}
+                                                Input : {
+                                                    inputs.split("_")[1]
+                                                }{" "}
                                             </div>
                                             {outputs && (
                                                 <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                     {" "}
                                                     Output :{" "}
-                                                    {outputs[inputs[1]][0]}{" "}
+                                                    {outputs.split("_")[1]}{" "}
                                                 </div>
                                             )}
 
@@ -358,20 +347,10 @@ export default function Page({ params }: any) {
                                                     <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                         {" "}
                                                         Expected Output :{" "}
-                                                        {eoutputs[1]}{" "}
-                                                    </div>
-                                                )
-                                            }
-                                            {
-                                                //@ts-ignore
-                                                outputs && (
-                                                    <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
-                                                        {" "}
-                                                        Stdout :<br />
                                                         {
-                                                            outputs[
-                                                                inputs[1]
-                                                            ][1]
+                                                            eoutputs.split(
+                                                                "_"
+                                                            )[1]
                                                         }{" "}
                                                     </div>
                                                 )
@@ -383,13 +362,15 @@ export default function Page({ params }: any) {
                                         >
                                             <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                 {" "}
-                                                Input : {inputs[2]}{" "}
+                                                Input : {
+                                                    inputs.split("_")[2]
+                                                }{" "}
                                             </div>
                                             {outputs && (
                                                 <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                     {" "}
                                                     Output :{" "}
-                                                    {outputs[inputs[2]][0]}{" "}
+                                                    {outputs.split("_")[2]}{" "}
                                                 </div>
                                             )}
 
@@ -399,20 +380,10 @@ export default function Page({ params }: any) {
                                                     <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
                                                         {" "}
                                                         Expected Output :{" "}
-                                                        {eoutputs[2]}{" "}
-                                                    </div>
-                                                )
-                                            }
-                                            {
-                                                //@ts-ignore
-                                                outputs && (
-                                                    <div className="w-full  border rounded-lg color1 p-4 border-slate-700">
-                                                        {" "}
-                                                        Stdout :<br />
                                                         {
-                                                            outputs[
-                                                                inputs[2]
-                                                            ][1]
+                                                            eoutputs.split(
+                                                                "_"
+                                                            )[2]
                                                         }{" "}
                                                     </div>
                                                 )

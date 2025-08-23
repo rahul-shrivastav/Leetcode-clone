@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { AiOutlinePython } from "react-icons/ai";
 
@@ -12,13 +12,15 @@ import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism-solarizedlight.css";
 
 //@ts-ignore
-const CodeEditor = ({ setoutputs, inputs }) => {
+const CodeEditor = ({ setoutputs, inputs, setrerender }) => {
+    const [submission_id, setSubmissionId] = useState(null);
     const { toast } = useToast();
     const [executing, setexecuting] = useState(false);
     const [code, setCode] = useState(
         `'''You can define other functions before Solution functions'''\n'''Write your code inside this Solution function and must return the answer'''\n\ndef Solution(input):\n\n\n\n\n\n\n\n    return input\n`
     );
-
+    // const [code, setCode] = useState("print(10)");
+    // console.log(inputs);
     let outputs: any = {};
 
     const showtoast = (heading: string, desc: string) => {
@@ -27,14 +29,47 @@ const CodeEditor = ({ setoutputs, inputs }) => {
             description: desc,
         });
     };
+    useEffect(() => {
+        if (!submission_id) return;
 
-    const runcode = async (code: string, inputs: string) => {
-        let acode = code + `\nprint(f'@{Solution(${inputs})}')`;
-        if (!code) {
-            acode = "";
-        }
+        const interval = setInterval(async () => {
+            try {
+                const res = await fetch(
+                    `${process.env.NEXT_PUBLIC_SUBMIT_CODE_API}/status/${submission_id}`
+                );
+                const data = await res.json();
+                console.log(data);
+                if (data.status === "executed") {
+                    if (data.stderr) {
+                        if (data.exit_code === 124) {
+                            showtoast("Time Limit Exceeded", data.stderr);
+                        } else {
+                            showtoast("Error in Code Execution", data.stderr);
+                        }
+                    }
+
+                    setexecuting(false);
+                    setSubmissionId(null);
+                    setoutputs(data.stdout);
+                    setrerender((prev: any) => prev + 1);
+                    clearInterval(interval);
+                }
+            } catch (err) {
+                console.error("Polling error:", err);
+                clearInterval(interval);
+            }
+        }, 1000);
+
+        return () => {
+            clearInterval(interval);
+            setexecuting(false);
+        };
+    }, [submission_id]);
+
+    const runcode = async (code: string) => {
+        setexecuting(true);
         try {
-            const url = process.env.NEXT_PUBLIC_SUBMIT_CODE_API2 + "/execute";
+            const url = process.env.NEXT_PUBLIC_SUBMIT_CODE_API + "/submit";
 
             const options = {
                 method: "POST",
@@ -42,33 +77,15 @@ const CodeEditor = ({ setoutputs, inputs }) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    code: acode,
+                    code: code,
+                    inputs: inputs,
                 }),
             };
-            setexecuting(true);
 
             const response = await fetch(url, options);
 
             const result = await response.json();
-            console.log(result);
-            if (result.output) {
-                let idx = result.output.indexOf("@");
-                setexecuting(false);
-
-                if (result.output.slice(0, idx)) {
-                    return [
-                        result.output.slice(idx + 1),
-                        result.output.slice(0, idx),
-                    ];
-                } else {
-                    return [result.output.slice(idx + 1), "No Standard Output"];
-                }
-            }
-            if (result.error) {
-                setoutputs(null);
-                showtoast(result.error, result.details);
-            }
-            setexecuting(false);
+            setSubmissionId(result.submission_id);
         } catch (error) {
             showtoast(
                 "Code Execution Server not Responding",
@@ -79,25 +96,6 @@ const CodeEditor = ({ setoutputs, inputs }) => {
             setexecuting(false);
         }
     };
-    const fetchoutputs = async () => {
-        let v1 = await runcode(code, inputs[0]);
-        if (v1) {
-            outputs[inputs[0]] = v1;
-            let v2 = await runcode(code, inputs[1]);
-            if (v2) {
-                outputs[inputs[1]] = v2;
-                let v3 = await runcode(code, inputs[2]);
-                if (v3) {
-                    outputs[inputs[2]] = v3;
-                }
-            }
-        }
-        if (Object.keys(outputs).length < 3) {
-            setoutputs(null);
-        } else {
-            setoutputs(outputs);
-        }
-    };
 
     return (
         <div>
@@ -105,7 +103,7 @@ const CodeEditor = ({ setoutputs, inputs }) => {
                 {!executing && (
                     <div className="flex gap-2 h-8">
                         <button
-                            onClick={fetchoutputs}
+                            onClick={() => runcode(code)}
                             className="border border-white border-opacity-50  font-thin  hover:font-medium text-white hover:bg-white hover:text-black w-24  py-1 rounded-sm"
                         >
                             SUBMIT

@@ -20,18 +20,28 @@ r = redis.Redis.from_url(REDIS_URL)
 mongo_client = MongoClient(MONGO_URI)
 db = mongo_client["Application"]
 
-def run_code(code: str):
+def modify_code(inputs,code):
+    code.strip()
+    for tc in inputs.split('_'):
+        code += f'\nprint(Solution({tc}),end=\'_\')'
+    return code
+
+def run_code(code,inputs):
     os.makedirs("tmp", exist_ok=True)
+    code = modify_code(inputs,code)
     filename = os.path.abspath("tmp/temp.py")
     with open(filename, "w") as f:
         f.write(code)
 
     mal_keywords = set(['os','subprocess','sys','shutil','pathlib'])
+
     for i in code.split(' '):
         if i in mal_keywords:
-            return {"stdout": '',"exit_code": 124,  "stderr" : "Malicious Code Detected.Please write ethical code."}
+            return {"stdout": '',"exit_code": 1,  "stderr" : "Malicious Code Detected.Please write ethical code."}
     if not code:
         return {"stdout": '',"exit_code": 124,  "stderr" : "No code given."}
+
+    # time.sleep(5)
 
     if ENV == "production":
         try:
@@ -45,24 +55,24 @@ def run_code(code: str):
             return {"stdout": '',"exit_code": 124,  "stderr" : "Time limit exceeded."}
     
         except Exception as e:
-            return {"stdout": '',"exit_code": 124,  "stderr" : e}
+            return {"stdout": '',"exit_code": 1,  "stderr" : e}
+    else:
 
+        docker_cmd = [
+            "docker", "run", "--rm", "--init",
+            "--network", "none",         
+            "--cpus=1",                   
+            "--memory=256m",              
+            "-v", f"{filename}:/app/code.py",
+            "python:3.9",
+            "timeout", "5s", "python", "/app/code.py"   
+        ]
 
-    docker_cmd = [
-        "docker", "run", "--rm", "--init",
-        "--network", "none",         
-        "--cpus=1",                   
-        "--memory=256m",              
-        "-v", f"{filename}:/app/code.py",
-        "python:3.9",
-        "timeout", "5s", "python", "/app/code.py"   
-    ]
-
-    result = subprocess.run(
-        docker_cmd,
-        capture_output=True,
-        text=True
-    )
+        result = subprocess.run(
+            docker_cmd,
+            capture_output=True,
+            text=True
+        )
 
     return {
         "stdout": result.stdout,
@@ -76,26 +86,26 @@ def worker_loop(worker_id):
     while True:
         try:
             _, job_data = r.brpop("submissions_queue")  
+            # job_data = r.lindex("submissions_queue", -1)
             job = json.loads(job_data)
-            print(job)
 
             print(f"[Worker {worker_id}] Picked job {job['submission_id']}")
-            result = run_code(job["code"])
-            print(result)
+            result = run_code(job["code"],job["inputs"])
             query = {"submission_id": job['submission_id']}
 
             update = {
                 "$set": {
-                    "status": 'completed',
+                    "status": 'executed',
                     "stdout": result['stdout'],
                     "stderr": result['stderr'],
                     "exit_code": result['exit_code']
                 }
             }
             result = db['submissions'].update_one(query, update)
+            # print(result,'\n\n')
 
         except Exception as e:
-            print(f"[Worker {worker_id}] Error: {e}")
+            print(f"[Worker {worker_id}] Error: {e}\n\n")
             time.sleep(1)
 
 def start_workers(n=2):
