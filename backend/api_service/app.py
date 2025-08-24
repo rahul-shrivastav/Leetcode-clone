@@ -10,7 +10,17 @@ app = Flask(__name__)
 CORS(app)
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
-r = redis.Redis.from_url(REDIS_URL)
+
+# use this for local redis instance
+# r = redis.Redis.from_url(REDIS_URL)
+
+r = redis.Redis(
+    host=os.getenv("REDIS_HOSTED_URL"),
+    port=14567,
+    decode_responses=True,
+    username="default",
+    password=os.getenv("REDIS_PASSWORD")
+)
 
 MONGO_URI = os.getenv("MONGO_DB_URI", "mongodb://localhost:27017")
 mongo_client = MongoClient(MONGO_URI)
@@ -45,7 +55,7 @@ def submit_code():
         return jsonify({"submission_id": submission_id})
     except Exception as e:
         print(e)
-        return jsonify({"stdout": '',"exit_code": 124,  "stderr" : e}), 500
+        return jsonify({"stdout": '',"exit_code": 124,  "stderr" : str(e)}), 500
 
 
 @app.route("/status/<submission_id>", methods=["GET"])

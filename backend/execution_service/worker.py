@@ -18,7 +18,18 @@ ENV = 'dev'
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 MONGO_URI = os.getenv("MONGO_DB_URI", "mongodb://localhost:27017")
 
-r = redis.Redis.from_url(REDIS_URL)
+# use this for local redis instance
+# r = redis.Redis.from_url(REDIS_URL)
+
+# hosted redis instance
+r = redis.Redis(
+    host=os.getenv("REDIS_HOSTED_URL"),
+    port=14567,
+    decode_responses=True,
+    username="default",
+    password=os.getenv("REDIS_PASSWORD")
+)
+
 mongo_client = MongoClient(MONGO_URI)
 db = mongo_client["Application"]
 
@@ -85,7 +96,8 @@ def worker_loop(worker_id):
 
     while True:
         try:
-            _, job_data = r.brpop("submissions_queue")  
+            _, job_data = r.brpop("submissions_queue") 
+            print(job_data) 
             # job_data = r.lindex("submissions_queue", -1)
             job = json.loads(job_data)
 
@@ -121,4 +133,4 @@ def ping():
 
 if __name__ == "__main__":
     start_workers(n=3)  
-    app.run(host="0.0.0.0", port=5001)
+    app.run(host="0.0.0.0", port=5000)

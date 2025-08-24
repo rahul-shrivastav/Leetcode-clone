@@ -2,3 +2,4 @@ flask
 redis
 pymongo
 flask_cors
+gunicorn
