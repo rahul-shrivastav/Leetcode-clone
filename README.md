@@ -1,3 +1,6 @@
+
+<div align="center">
+
 # CodeArena 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) 
@@ -5,23 +8,55 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) 
 ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) 
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+
+</div>
 
 
 
 Welcome to CodeArena – a platform for practicing and solving coding problems, similar to LeetCode. Built with Next.js 14, MongoDB, and NextAuth, CodeArena provides a smooth user experience to enhance your coding skills and connect with others.    
 
+<div align="center">
+
 [![VISIT](https://img.shields.io/badge/-VISIT-blue?style=for-the-badge)](https://codearena-pi.vercel.app/)
+
+</div>
 
 ## Tech Stack
 
 - ` Next.js ` : A React-based framework for building server-rendered and static web applications, offering features like routing, API handling, and optimized performance.
 - ` React.js ` : A JavaScript library for building dynamic user interfaces with reusable components.
 - ` Node.js `: A server-side runtime that allows running JavaScript on the backend.
-- ` MongoDB ` : A NoSQL database that stores data in flexible, JSON-like documents.
-- ` Tailwind-CSS` : A utility-first CSS framework for building custom, responsive designs quickly by composing classes directly in HTML.
+- `MongoDB ` : A NoSQL database that stores data in flexible, JSON-like documents.
+- `Tailwind-CSS` : A utility-first CSS framework for building custom, responsive designs quickly by composing classes directly in HTML.
+- `Redis` : An in-memory data structure store commonly used as a database, cache, and message broker. I used it as a message queue to efficiently manage and process background tasks.
 
+<div align="center">
+
+## Workflow
+
+</div>
+
+<div align="center">
+
+<img width="700"  alt="Screenshot 2025-08-24 155855" src="https://github.com/user-attachments/assets/f9e5632e-2fb4-495c-893d-cd1f5d11dfa6" />
+
+</div>
+
+- User submits code from the frontend (React or similar).
+
+- API Service (Flask + Gunicorn) accepts the submission, stores metadata in MongoDB (status = pending), and pushes the job into Redis queue.
+
+- Worker Service (Flask background service with thread pool) pulls jobs from Redis, executes user code safely (via subprocess or Docker depending on environment), and updates the MongoDB record with results.
+
+- Frontend polls MongoDB via the API to check if submission results are available (status = executed).
+
+<div align="center">
 
 ## Getting Started
+
+</div>
 
 ### 1. Clone the Repository
 First, clone the repository to your local machine:
