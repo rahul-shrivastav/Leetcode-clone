@@ -61,18 +61,11 @@ export default function Page({ params }: any) {
     // console.log(outputs);
     useEffect(() => {
         const fetchproblem = async () => {
-            const response = await fetch(
-                `${
-                    process.env.NEXT_PUBLIC_NODE_ENV === "dev"
-                        ? `http://localhost:3000`
-                        : process.env.NEXT_PUBLIC_NEXTAUTH_URL
-                }/api/fetchoneproblem`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ id: params.id }),
-                }
-            );
+            const response = await fetch(`/api/fetchoneproblem`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: params.id }),
+            });
             const data = await response.json();
             setTimeout(() => {
                 setproblem(data);
