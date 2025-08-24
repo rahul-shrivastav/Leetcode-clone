@@ -127,8 +127,7 @@ def start_workers(n=2):
 
 @app.route("/ping")
 def ping():
-    print("Pinged Worker")
-    return jsonify({"status": "ok"})
+    return jsonify({"worker_status": "ok"})
 
 if __name__ == "__main__":
     start_workers(n=3)  

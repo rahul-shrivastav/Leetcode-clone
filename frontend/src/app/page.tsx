@@ -12,14 +12,22 @@ export default function Home() {
     useEffect(() => {
         const ping = async () => {
             try {
-                await fetch(`${process.env.NEXT_PUBLIC_SUBMIT_CODE_API}/ping`, {
-                    method: "GET",
-                    cache: "no-store",
-                });
-                await fetch(`${process.env.NEXT_PUBLIC_SUBMIT_CODE_API}/ping`, {
-                    method: "GET",
-                    cache: "no-store",
-                });
+                let ping_api = await fetch(
+                    `${process.env.NEXT_PUBLIC_SUBMIT_CODE_API}/ping`,
+                    {
+                        method: "GET",
+                        cache: "no-store",
+                    }
+                );
+                console.log(await ping_api.json());
+                let worker_api = await fetch(
+                    `${process.env.NEXT_PUBLIC_WORKER_URL}/ping`,
+                    {
+                        method: "GET",
+                        cache: "no-store",
+                    }
+                );
+                console.log(await worker_api.json());
             } catch (err) {
                 console.error("Ping failed:", err);
             }

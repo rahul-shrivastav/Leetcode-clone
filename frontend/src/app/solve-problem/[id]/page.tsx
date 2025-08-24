@@ -75,6 +75,12 @@ export default function Page({ params }: any) {
         };
         fetchproblem();
     }, []);
+    useEffect(() => {
+        showtoast(
+            "Server Hosted on Free Tier .",
+            "For first request , it might take 2 minutes due to coldstart."
+        );
+    }, []);
     // console.log(eoutputs);
     useEffect(() => {
         console.log(outputs, eoutputs);

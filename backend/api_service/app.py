@@ -67,8 +67,7 @@ def get_status(submission_id):
 
 @app.route("/ping",methods=["GET"])
 def ping():
-    print('Pinged API')
-    return jsonify({"status": "ok"})
+    return jsonify({"api_status": "ok"})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
