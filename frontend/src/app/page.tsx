@@ -16,8 +16,7 @@ export default function Home() {
                     method: "GET",
                     cache: "no-store",
                 });
-                await fetch("/api/ping");
-                await fetch(`${process.env.NEXT_PUBLIC_WORKER_URL}/ping`, {
+                await fetch(`${process.env.NEXT_PUBLIC_SUBMIT_CODE_API}/ping`, {
                     method: "GET",
                     cache: "no-store",
                 });

@@ -38,7 +38,7 @@ const CodeEditor = ({ setoutputs, inputs, setrerender }) => {
                     `${process.env.NEXT_PUBLIC_SUBMIT_CODE_API}/status/${submission_id}`
                 );
                 const data = await res.json();
-                console.log(data);
+                // console.log(data);
                 if (data.status === "executed") {
                     if (data.stderr) {
                         if (data.exit_code === 124) {
