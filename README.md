@@ -71,58 +71,50 @@ git clone https://github.com/rahul-shrivastav/Leetcode-clone.git
 Install the required dependencies by running:
 
 ```bash
+cd frontend
 npm install
+cd ../backend/api_service
+pip install -r requirements.txt
+cd ../execution_service
+pip install -r requirements.txt
 ```
 ### 3. Setup Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 ```bash
-MONGO_DB_URI  
-AUTH_SECRET  
-GOOGLE_CLIENT_ID  
-GOOGLE_CLIENT_SECRET  
-NODE_ENV
-NEXT_PUBLIC_NEXTAUTH_URL
-NEXTAUTH_URL
-NEXT_PUBLIC_SUBMIT_CODE_API2  
+MONGO_DB_URI=
+AUTH_SECRET =  
+GOOGLE_CLIENT_ID = 
+GOOGLE_CLIENT_SECRET = 
+
+NEXTAUTH_URL= http://localhost:3000
+NEXT_PUBLIC_NEXTAUTH_URL= http://localhost:3000
+
+NEXT_PUBLIC_SUBMIT_CODE_API= http://127.0.0.1:5000
+SUBMIT_CODE_API= http://127.0.0.1:5000
+NEXT_PUBLIC_WORKER_URL = http://127.0.0.1:5001
+WORKER_URL = http://127.0.0.1:5001
+REDIS_URL = redis://localhost:6379
+NEXT_PUBLIC_REDIS_URL = redis://localhost:6379  
 ```
 A sample .evn file is also provided in the repository.
 
 ### 4. Run Dev server Locally
 
-First, run the development server:
+First, run the frontend and backend development server:
 
 ```bash
+cd frontend
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
-### 4. Setup the python code execution server locally 
-Follow the readme.md file in the given repo to setup locally :
-
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Visit%20Repo-blue?style=for-the-badge&logo=github)](https://github.com/rahul-shrivastav/Python-Code-Execution-Server)                                     
-
-<br>
-
-After setting up python server locally , open port `3000` on your `localhost` with your browser to see the result.
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-
-## Resources
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
+and locate to backend
+```bash
+cd api_service
+python app.py
+cd ../execution_service
+python worker.py
+```
 <br><br>
 
-## Sample Screenshots
-![Screenshot 2024-09-08 035903](https://github.com/user-attachments/assets/4055d2d1-a55b-425c-9af4-5e8c73c0b23b)
-
-![Screenshot 2024-09-03 020219](https://github.com/user-attachments/assets/9f359316-7cad-4358-9133-87a0993313a4)
 
