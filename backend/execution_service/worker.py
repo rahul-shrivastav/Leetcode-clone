@@ -114,7 +114,6 @@ def worker_loop(worker_id):
                 }
             }
             result = db['submissions'].update_one(query, update)
-            # print(result,'\n\n')
 
         except Exception as e:
             print(f"[Worker {worker_id}] Error: {e}\n\n")
