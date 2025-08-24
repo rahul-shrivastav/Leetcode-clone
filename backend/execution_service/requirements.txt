@@ -3,3 +3,4 @@ redis
 pymongo
 flask_cors
 gunicorn
+python-dotenv
