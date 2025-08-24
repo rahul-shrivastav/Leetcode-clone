@@ -3,13 +3,13 @@
 
 def Solution(input):
 
-    #while True : pass
-    s = str(input)
 
 
 
 
-    return s == s[::-1]
+
+
+    return input
 
 print(Solution(10),end='_')
 print(Solution(2112),end='_')

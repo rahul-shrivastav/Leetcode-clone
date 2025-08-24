@@ -4,9 +4,11 @@ import threading,subprocess
 from flask import Flask, jsonify
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from flask_cors import CORS
 
 load_dotenv()  
 app = Flask(__name__)
+CORS(app)
 
 # set ENV  to 'development' for spawing docker container for code execution , render free tier doesnt allow it
 # for render free server , code execution is done using subprocess library without docker containers
@@ -40,8 +42,6 @@ def run_code(code,inputs):
             return {"stdout": '',"exit_code": 1,  "stderr" : "Malicious Code Detected.Please write ethical code."}
     if not code:
         return {"stdout": '',"exit_code": 124,  "stderr" : "No code given."}
-
-    # time.sleep(5)
 
     if ENV == "production":
         try:
@@ -116,6 +116,7 @@ def start_workers(n=2):
 
 @app.route("/ping")
 def ping():
+    print("Pinged Worker")
     return jsonify({"status": "ok"})
 
 if __name__ == "__main__":

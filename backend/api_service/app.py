@@ -24,8 +24,6 @@ def submit_code():
         data = request.get_json()
         code = data.get("code")
         inputs = data.get("inputs", [])
-        print(inputs)
-
 
         if not code:
             return jsonify({"stdout": '',"exit_code": 124,  "stderr" : "No code given."})
@@ -57,8 +55,9 @@ def get_status(submission_id):
         return jsonify({"error": "Submission not found"}), 404
     return jsonify(doc)
 
-@app.route("/ping")
+@app.route("/ping",methods=["GET"])
 def ping():
+    print('Pinged API')
     return jsonify({"status": "ok"})
 
 if __name__ == "__main__":
