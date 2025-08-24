@@ -31,7 +31,7 @@ const CodeEditor = ({ setoutputs, inputs, setrerender }) => {
     };
     useEffect(() => {
         if (!submission_id) return;
-
+        let count = 0;
         const interval = setInterval(async () => {
             try {
                 const res = await fetch(
@@ -39,6 +39,7 @@ const CodeEditor = ({ setoutputs, inputs, setrerender }) => {
                 );
                 const data = await res.json();
                 // console.log(data);
+                count += 1;
                 if (data.status === "executed") {
                     if (data.stderr) {
                         if (data.exit_code === 124) {
@@ -52,6 +53,16 @@ const CodeEditor = ({ setoutputs, inputs, setrerender }) => {
                     setSubmissionId(null);
                     setoutputs(data.stdout);
                     setrerender((prev: any) => prev + 1);
+                    clearInterval(interval);
+                }
+                if (count >= 6) {
+                    setexecuting(false);
+                    setSubmissionId(null);
+                    setrerender((prev: any) => prev + 1);
+                    showtoast(
+                        "Request Timeout",
+                        "Error due to free tier coldstart. Please try again."
+                    );
                     clearInterval(interval);
                 }
             } catch (err) {
