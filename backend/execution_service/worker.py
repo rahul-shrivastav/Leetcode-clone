@@ -14,7 +14,7 @@ CORS(app)
 # for render free server , code execution is done using subprocess library without docker containers
 # make sure to install docker and python image from docker hub
 
-ENV = 'dev'
+ENV = 'production'
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 MONGO_URI = os.getenv("MONGO_DB_URI", "mongodb://localhost:27017")
 
