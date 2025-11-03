@@ -61,7 +61,7 @@ const CodeEditor = ({ setoutputs, inputs, setrerender }) => {
                     setrerender((prev: any) => prev + 1);
                     showtoast(
                         "Request Timeout",
-                        "Error due to free tier coldstart. Please try again."
+                        "Error due to free tier coldstart. Please try again. It might show error again as the free server needs 1-2 minutes to start."
                     );
                     clearInterval(interval);
                 }
