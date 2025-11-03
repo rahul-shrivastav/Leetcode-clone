@@ -16,11 +16,12 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
 
 r = redis.Redis(
     host=os.getenv("REDIS_HOSTED_URL"),
-    port=14567,
+    port=os.getenv("REDIS_HOSTED_PORT"),
     decode_responses=True,
     username="default",
     password=os.getenv("REDIS_PASSWORD")
 )
+
 
 MONGO_URI = os.getenv("MONGO_DB_URI", "mongodb://localhost:27017")
 mongo_client = MongoClient(MONGO_URI)

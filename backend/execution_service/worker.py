@@ -24,11 +24,12 @@ MONGO_URI = os.getenv("MONGO_DB_URI", "mongodb://localhost:27017")
 # hosted redis instance
 r = redis.Redis(
     host=os.getenv("REDIS_HOSTED_URL"),
-    port=14567,
+    port=os.getenv("REDIS_HOSTED_PORT"),
     decode_responses=True,
     username="default",
     password=os.getenv("REDIS_PASSWORD")
 )
+
 
 mongo_client = MongoClient(MONGO_URI)
 db = mongo_client["Application"]
